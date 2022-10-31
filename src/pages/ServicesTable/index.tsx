@@ -108,7 +108,7 @@ function ServiceTable() {
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable header={tableHeader} rows={services} />
+          <CustomTable header={tableHeader} service={services} />
         </Box>
       </Content>
     </Container>
