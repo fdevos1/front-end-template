@@ -2,11 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  gap: 1rem;
+  background-color: #101213;
 `;
 
 export const Content = styled.div`
@@ -16,7 +14,7 @@ export const Content = styled.div`
   width: 100%;
   height: 95%;
 
-  padding: 0.5rem 1rem;
+  padding: 1rem 0rem;
 
   gap: 1rem;
 `;

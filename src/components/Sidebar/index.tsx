@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, Divider } from "@mui/material";
 
 import { Container } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -23,6 +23,7 @@ interface IButtonsSidebar {
 function Sidebar() {
   const { signOut }: any = useContext(AuthContext);
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -56,74 +57,99 @@ function Sidebar() {
           height={1}
           width={1}
           display="flex"
+          flexDirection="column"
           justifyContent={"space-between"}
-          px={2}
+          alignItems="center"
+          p={1}
         >
           <Box display="flex" alignItems="center">
-            <Typography variant="h5" className="pandorga">
-              PANDORGA
-            </Typography>
+            <Typography className="pandorga">PANDORGA</Typography>
           </Box>
 
-          <Box
-            display="flex"
-            width={"50%"}
-            height={1}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            {buttonsSidebar.map((button: IButtonsSidebar) => {
-              return (
-                <Box
-                  onClick={() => handleChangeRoute(button.url)}
-                  display="flex"
-                  width={"33%"}
-                  height={"80%"}
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  gap={1}
-                  key={button.id}
-                  color="white"
-                  sx={[
-                    {
-                      "&:hover": {
-                        backgroundColor: "#f3f3f3",
-                        cursor: "pointer",
-                        color: "black",
-                        borderRadius: "1rem",
-                      },
-                    },
-                  ]}
-                >
-                  {button.image}
-                  <Typography variant="button">{button.text}</Typography>
-                </Box>
-              );
-            })}
-          </Box>
-
-          <Box>
-            <IconButton
-              onClick={handleLogout}
-              sx={[
-                {
-                  "&:hover": {
-                    backgroundColor: "#f3f3f3",
-                  },
-                },
-              ]}
+          <Box height={1} py={1}>
+            <Divider color="#1B1E1F" />
+            <Box
+              display="flex"
+              flexDirection="column"
+              width={1}
+              height={1}
+              py={1}
             >
-              <LogoutIcon
-                htmlColor="white"
+              <Typography variant="caption" color="#2C2E2F" marginX={2}>
+                Menu
+              </Typography>
+              <Box display="flex" flexDirection="column" width={1} gap={2}>
+                {buttonsSidebar.map((button: IButtonsSidebar) => {
+                  return (
+                    <Box
+                      onClick={() => handleChangeRoute(button.url)}
+                      display="flex"
+                      width={1}
+                      height={"3rem"}
+                      alignItems={"center"}
+                      gap={2}
+                      p={2}
+                      key={button.id}
+                      whiteSpace={"nowrap"}
+                      color={
+                        location.pathname === button.url ? "white" : "#585A5C"
+                      }
+                      sx={
+                        location.pathname === button.url
+                          ? [
+                              {
+                                "&": {
+                                  backgroundColor: "#1B1E1F",
+                                  cursor: "pointer",
+                                  borderRadius: "1rem",
+                                },
+                              },
+                            ]
+                          : [
+                              {
+                                "&:hover": {
+                                  cursor: "pointer",
+                                  backgroundColor: "#232324",
+                                  borderRadius: "1rem",
+                                  color: "#f0f0f0",
+                                },
+                              },
+                            ]
+                      }
+                    >
+                      {button.image}
+                      <Typography variant="body2">{button.text}</Typography>
+                    </Box>
+                  );
+                })}
+              </Box>
+            </Box>
+            <Divider color="#1B1E1F" />
+          </Box>
+          <Box>
+            <Box>
+              <IconButton
+                onClick={handleLogout}
                 sx={[
                   {
                     "&:hover": {
-                      color: "black",
+                      backgroundColor: "#f3f3f3",
                     },
                   },
                 ]}
-              />
-            </IconButton>
+              >
+                <LogoutIcon
+                  htmlColor="white"
+                  sx={[
+                    {
+                      "&:hover": {
+                        color: "black",
+                      },
+                    },
+                  ]}
+                />
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       </Container>

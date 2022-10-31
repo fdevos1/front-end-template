@@ -16,8 +16,8 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { getUser } from "../../services/user";
 import Sidebar from "../../components/Sidebar";
-import { userColumns } from "./utils";
 import CustomTable from "../../components/Table";
+import SearchbarComponent from "../../components/Searchbar";
 
 function UsersTable() {
   const [users, setUsers] = useState([]);
@@ -35,18 +35,16 @@ function UsersTable() {
 
   const [filter, setFilter] = useState("");
 
-  const fetchedRows: any = users.map((user: any) => {
-    return {
-      id: user.user_id,
-      name: user.name,
-      cellphone: user.cellphone,
-      created_at: moment(user.created_at).format("DD/MM/YYYY"),
-    };
-  });
-
   const handleChange = (e: SelectChangeEvent) => {
     setFilter(e.target.value);
   };
+
+  const tableHeader = [
+    { text: "ID" },
+    { text: "Nome" },
+    { text: "Celular" },
+    { text: "Criado em" },
+  ];
 
   return (
     <Container>
@@ -60,64 +58,23 @@ function UsersTable() {
             justifyContent: "space-between",
           }}
         >
-          <Box sx={{ display: "flex", height: 40, gap: 4 }}>
-            <Box
-              sx={{
-                display: "flex",
-                width: "12rem",
-                height: 1,
-              }}
-            >
-              <Select
-                value={filter}
-                onChange={handleChange}
-                displayEmpty
-                sx={{
-                  width: 1,
-                  height: 1,
-                  textAlign: "center",
-                }}
-              >
-                <MenuItem value="">
-                  <em>Data de criação</em>
-                </MenuItem>
-              </Select>
-            </Box>
-
+          <Box sx={{ display: "flex", height: 64, gap: 4 }}>
             <Box sx={{ width: "25rem", maxWidth: 500, height: 1 }}>
-              <Input
-                placeholder="Procurar um usuário"
-                disableUnderline
-                id="search-input"
-                sx={{
-                  width: 1,
-                  height: 1,
-                  padding: 1,
-                  textAlign: "center",
-                  border: 2,
-                  borderRadius: 1,
-                  borderColor: "#E4E4E4",
-                  bgcolor: "rgba(217, 217, 217, 0.15)",
-                  color: "#6c6c6c",
+              <SearchbarComponent
+                label="Procurar usuário"
+                inputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                 }}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                }
               />
             </Box>
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable
-            rows={fetchedRows}
-            columns={userColumns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            disableSelectionOnClick
-            checkboxSelection
-          />
+          <CustomTable header={tableHeader} rows={users} />
         </Box>
       </Content>
     </Container>

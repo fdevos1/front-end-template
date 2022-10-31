@@ -3,8 +3,6 @@ import moment from "moment";
 
 import CustomTable from "../../components/Table";
 
-import { serviceColumns } from "./utils";
-
 import {
   Select,
   SelectChangeEvent,
@@ -37,16 +35,12 @@ function ServiceTable() {
 
   const [filter, setFilter] = useState("");
 
-  const fetchedRows: any = services.map((service: any) => {
-    return {
-      id: service.id,
-      user_id: service.u_id,
-      created_at: moment(service.created_at).format("DD/MM/YYYY"),
-      finished_at: service.finished_at
-        ? moment(service.finished_at).format("DD/MM/YYYY")
-        : "Não finalizado",
-    };
-  });
+  const tableHeader = [
+    { text: "ID" },
+    { text: "ID do usuário" },
+    { text: "Criado em" },
+    { text: "Finalizado em" },
+  ];
 
   const handleChange = (e: SelectChangeEvent) => {
     setFilter(e.target.value);
@@ -114,14 +108,7 @@ function ServiceTable() {
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable
-            rows={fetchedRows}
-            columns={serviceColumns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            disableSelectionOnClick
-            checkboxSelection
-          />
+          <CustomTable header={tableHeader} rows={services} />
         </Box>
       </Content>
     </Container>
