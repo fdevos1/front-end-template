@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
+import Sidebar from "../../components/Sidebar";
 import CustomTable from "../../components/Table";
+import SearchbarComponent from "../../components/Searchbar";
 
 import {
   Select,
@@ -17,7 +19,6 @@ import { Container, Content } from "./styles";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { getServices } from "../../services/services";
-import Sidebar from "../../components/Sidebar";
 
 function ServiceTable() {
   const [services, setServices] = useState([]);
@@ -33,18 +34,12 @@ function ServiceTable() {
     requestServices();
   }, []);
 
-  const [filter, setFilter] = useState("");
-
   const tableHeader = [
     { text: "ID" },
     { text: "ID do usuário" },
     { text: "Criado em" },
     { text: "Finalizado em" },
   ];
-
-  const handleChange = (e: SelectChangeEvent) => {
-    setFilter(e.target.value);
-  };
 
   return (
     <Container>
@@ -58,57 +53,23 @@ function ServiceTable() {
             justifyContent: "space-between",
           }}
         >
-          <Box sx={{ display: "flex", height: 40, gap: 4 }}>
-            <Box
-              sx={{
-                display: "flex",
-                width: "12rem",
-                height: 1,
-              }}
-            >
-              <Select
-                value={filter}
-                onChange={handleChange}
-                displayEmpty
-                sx={{
-                  width: 1,
-                  height: 1,
-                  textAlign: "center",
-                }}
-              >
-                <MenuItem value="">
-                  <em>Data de criação</em>
-                </MenuItem>
-              </Select>
-            </Box>
-
+          <Box sx={{ display: "flex", height: 64, gap: 4 }}>
             <Box sx={{ width: "25rem", maxWidth: 500, height: 1 }}>
-              <Input
-                placeholder="Procurar um usuário"
-                disableUnderline
-                id="search-input"
-                sx={{
-                  width: 1,
-                  height: 1,
-                  padding: 1,
-                  textAlign: "center",
-                  border: 2,
-                  borderRadius: 1,
-                  borderColor: "#E4E4E4",
-                  bgcolor: "rgba(217, 217, 217, 0.15)",
-                  color: "#6c6c6c",
+              <SearchbarComponent
+                label="Procurar usuário"
+                inputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                 }}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                }
               />
             </Box>
           </Box>
         </Box>
-        <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable header={tableHeader} service={services} />
+        <Box sx={{ width: 1, height: 1, overflow: "auto" }}>
+          <CustomTable header={tableHeader} values={services} />
         </Box>
       </Content>
     </Container>

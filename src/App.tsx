@@ -13,6 +13,7 @@ import { AuthProvider, AuthContext } from "./context/auth";
 import UsersTable from "./pages/UsersTable";
 import ServiceTable from "./pages/ServicesTable";
 import Dashboard from "./pages/Dashboard";
+import GroupManagement from "./pages/GroupManagement";
 
 function App() {
   const Private = ({ children }: any) => {
@@ -54,6 +55,8 @@ function App() {
           />
 
           <Route path="/services" element={<ServiceTable />} />
+
+          <Route path="/group-management" element={<GroupManagement />} />
         </Switch>
       </AuthProvider>
     </BrowserRouter>

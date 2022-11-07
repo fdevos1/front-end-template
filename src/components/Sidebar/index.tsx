@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/auth";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 interface IButtonsSidebar {
   text: string;
@@ -43,6 +44,12 @@ function Sidebar() {
       id: 2,
       image: <ScreenSearchDesktopIcon />,
       url: "/services",
+    },
+    {
+      text: "Gerenciamento de grupos",
+      id: 3,
+      image: <GroupsIcon />,
+      url: "/group-management",
     },
   ];
 

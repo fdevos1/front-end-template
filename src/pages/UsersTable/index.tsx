@@ -74,7 +74,7 @@ function UsersTable() {
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable header={tableHeader} user={users} />
+          <CustomTable header={tableHeader} values={users} />
         </Box>
       </Content>
     </Container>
