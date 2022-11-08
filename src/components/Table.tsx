@@ -27,8 +27,6 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 
-import { ITableTypes } from "../utils/tableTypes";
-
 const HeaderTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     color: theme.palette.common.white,
@@ -75,6 +73,8 @@ interface TablePaginationActionsProps {
 function CustomTable(props: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  console.log(props.values.map((item: any) => item));
 
   const location = useLocation();
 
@@ -186,9 +186,8 @@ function CustomTable(props: any) {
                 page * rowsPerPage + rowsPerPage
               )
             : props.values
-          ).map((item: ITableTypes, index: any) => (
+          ).map((item: any, index: any) => (
             <>
-              {console.log(item)}
               <StyledTableRow key={index}>
                 <StyledTableCell align="center">
                   <Typography variant="body1">
@@ -204,14 +203,14 @@ function CustomTable(props: any) {
                   <Typography variant="body1">
                     {item?.cellphone ||
                       item?.subject ||
-                      moment(item?.created_at).format("DD/MM/YY - HH:mm")}
+                      moment(item.created_at).format("DD/MM/YY - HH:mm")}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   <Typography variant="body1">
-                    {!item.finished_at
-                      ? null
-                      : item.finished_at !== null
+                    {item.user_created_at
+                      ? moment(item.user_created_at).format("DD/MM/YY - HH:mm")
+                      : item?.finished_at !== null
                       ? moment(item.finished_at).format("DD/MM/YY - HH:mm")
                       : "Não finalizado"}
                   </Typography>
