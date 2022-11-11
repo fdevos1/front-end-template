@@ -19,13 +19,14 @@ import {
 
 import { IUserTypes } from "../../types/UserTypes";
 import { IServiceTypes } from "../../types/ServiceTypes";
+import CustomModal from "../../components/Modal";
+import { surveyFormInputs } from "../../utils/ModalFormValues";
 
 function Dashboard() {
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<IServiceTypes[]>([]);
   const [users, setUsers] = useState<IUserTypes[]>([]);
   const [survey, setSurvey] = useState<any[]>([]);
-
-  const [tableProps, setTableProps] = useState<any[]>([]);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -181,7 +182,11 @@ function Dashboard() {
                 <Typography variant="h6" color="white">
                   Criar uma enquete
                 </Typography>
-                <ButtonComponent text="Criar enquete" variant="contained" />
+                <ButtonComponent
+                  text="Criar enquete"
+                  variant="contained"
+                  onClick={() => setOpen(true)}
+                />
               </Box>
               <Box>
                 <CustomTable header={surveyTableHeader} values={survey} />
@@ -191,6 +196,13 @@ function Dashboard() {
             </Box>
           </Box>
         </Box>
+
+        <CustomModal
+          open={open}
+          setState={setOpen}
+          title={"Criar enquete"}
+          formValues={surveyFormInputs}
+        />
       </Content>
     </Container>
   );
