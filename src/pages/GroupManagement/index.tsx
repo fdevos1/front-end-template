@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table";
+import CustomTable from "../../components/Table/Table";
 import SearchbarComponent from "../../components/Searchbar";
 
 import { useForm } from "react-hook-form";
@@ -66,6 +66,7 @@ function GroupManagement() {
     { text: "ID" },
     { text: "Nome do grupo" },
     { text: "Assunto do grupo" },
+    { text: "Status do grupo" },
   ];
 
   const style = {
@@ -127,14 +128,6 @@ function GroupManagement() {
                 }}
               />
             </Box>
-          </Box>
-
-          <Box>
-            <ButtonComponent
-              variant="contained"
-              text="Criar novo grupo"
-              onClick={handleOpen}
-            />
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>

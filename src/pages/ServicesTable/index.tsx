@@ -2,17 +2,10 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 
 import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table";
+import CustomTable from "../../components/Table/Table";
 import SearchbarComponent from "../../components/Searchbar";
 
-import {
-  Select,
-  SelectChangeEvent,
-  Box,
-  MenuItem,
-  InputAdornment,
-  Input,
-} from "@mui/material";
+import { Box, InputAdornment } from "@mui/material";
 
 import { Container, Content } from "./styles";
 
@@ -39,6 +32,7 @@ function ServiceTable() {
     { text: "ID do usuário" },
     { text: "Criado em" },
     { text: "Finalizado em" },
+    { text: "" },
   ];
 
   return (

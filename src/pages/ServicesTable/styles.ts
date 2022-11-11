@@ -11,7 +11,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
+  width: 95%;
   height: 100%;
 
   padding: 1rem 0rem;

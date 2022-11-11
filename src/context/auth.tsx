@@ -12,6 +12,9 @@ interface IResponse {
     expiresIn: number;
     u_id: number;
   };
+  loggedUser: {
+    name: string;
+  };
 }
 
 export const AuthContext = createContext({});
@@ -24,7 +27,6 @@ export const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     const recoveredUser = localStorage.getItem("user");
-
     if (recoveredUser) {
       setUser(JSON.parse(recoveredUser));
     }
@@ -36,15 +38,17 @@ export const AuthProvider = ({ children }: any) => {
     const response: IResponse = await login(email, password);
     console.log(response);
 
-    const loggedUser = response.refreshToken.u_id;
+    const loggedUserId = response.refreshToken.u_id;
+    const loggedUserName = response.loggedUser.name;
     const token = response.token;
 
-    localStorage.setItem("user", JSON.stringify(loggedUser));
+    localStorage.setItem("user", JSON.stringify(loggedUserId));
+    localStorage.setItem("user_name", loggedUserName);
     localStorage.setItem("token", token);
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    setUser(loggedUser);
+    setUser(loggedUserId);
 
     navigate("/dashboard");
   };

@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-import {
-  Select,
-  SelectChangeEvent,
-  Box,
-  MenuItem,
-  InputAdornment,
-  Input,
-} from "@mui/material";
+import { Box, InputAdornment } from "@mui/material";
 
 import { Container, Content } from "./styles";
 
@@ -16,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { getUser } from "../../services/user";
 import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table";
+import CustomTable from "../../components/Table/Table";
 import SearchbarComponent from "../../components/Searchbar";
 
 function UsersTable() {
@@ -33,17 +26,12 @@ function UsersTable() {
     requestUsers();
   }, []);
 
-  const [filter, setFilter] = useState("");
-
-  const handleChange = (e: SelectChangeEvent) => {
-    setFilter(e.target.value);
-  };
-
   const tableHeader = [
     { text: "ID" },
     { text: "Nome" },
     { text: "Celular" },
     { text: "Criado em" },
+    { text: "" },
   ];
 
   return (

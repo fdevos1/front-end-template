@@ -6,14 +6,17 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: 2rem;
-
-  align-items: center;
-  justify-content: center;
-
   background-color: #101213;
+`;
 
-  padding: 2rem;
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
 
-  gap: 5rem;
+  width: 95%;
+  height: 100%;
+
+  overflow: auto;
+
+  background-color: #232324;
 `;
