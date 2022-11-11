@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-
 import { useLocation } from "react-router-dom";
-
 import {
   Table,
   TableBody,
@@ -10,13 +8,13 @@ import {
   Typography,
   TableFooter,
 } from "@mui/material";
-
 import moment from "moment";
+
+import ButtonComponent from "../Button";
 
 import { HeaderTableCell, StyledTableCell } from "./utils/TableCell";
 import { StyledTableRow } from "./utils/TableRow";
 import { CustomTablePagination } from "./utils/TablePagination";
-import ButtonComponent from "../Button";
 
 function CustomTable(props: any) {
   const [page, setPage] = useState(0);
@@ -113,10 +111,6 @@ function CustomTable(props: any) {
             };
 
             const sendedSurvey = () => {
-              if (!item.sended) {
-                return null;
-              }
-
               if (item.sended === false) {
                 return <ButtonComponent text="enviar" />;
               } else if (item.sended === true) {

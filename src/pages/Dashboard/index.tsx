@@ -1,43 +1,49 @@
 import React, { useState, useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { Box, Typography } from "@mui/material";
 
-import CustomTable from "../../components/Table/Table";
+import { Container, Content } from "./styles";
+
+import CustomTable from "../../components/Table";
 import ButtonComponent from "../../components/Button";
+import Sidebar from "../../components/Sidebar";
 
 import { getServices } from "../../services/services";
 import { getUser } from "../../services/user";
 
-import { Container, Content } from "./styles";
-import Sidebar from "../../components/Sidebar";
+import {
+  serviceTableHeader,
+  surveyTableHeader,
+  userTableHeader,
+} from "../../utils/TableHeader";
+
+import { IUserTypes } from "../../types/UserTypes";
+import { IServiceTypes } from "../../types/ServiceTypes";
 
 function Dashboard() {
   const [services, setServices] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<IUserTypes[]>([]);
   const [survey, setSurvey] = useState<any[]>([]);
+
+  const [tableProps, setTableProps] = useState<any[]>([]);
 
   const navigate = useNavigate();
 
   const loggedUser = localStorage.getItem("user_name");
 
-  const requestServices = async () => {
-    const fetchServices = await getServices();
-    setServices(fetchServices);
-  };
+  const listServices = async () => {
+    const fetchService = await getServices();
+    setServices(fetchService);
 
-  useEffect(() => {
-    requestServices();
-  }, []);
+    const fetchSurvey = mockSurveyData;
+    setSurvey(fetchSurvey);
 
-  const requestUsers = async () => {
     const fetchUsers = await getUser();
     setUsers(fetchUsers);
   };
 
   useEffect(() => {
-    requestUsers();
+    listServices();
   }, []);
 
   const mockSurveyData = [
@@ -78,37 +84,38 @@ function Dashboard() {
     },
   ];
 
-  const requestSurvey = async () => {
-    const fetchSurvey = mockSurveyData;
-    setSurvey(fetchSurvey);
+  const createTable = (
+    tableTitle: string,
+    tableHeader: { text: string }[],
+    tableValue: any[],
+    buttonText: string,
+    buttonUrl: string
+  ) => {
+    return (
+      <Box
+        width={1}
+        py={1}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={1}
+        borderLeft="1px solid #1b1e1f"
+        borderRadius={1}
+        bgcolor="#0E1011"
+      >
+        <Typography variant="h6" color="white">
+          {tableTitle}
+        </Typography>
+
+        <CustomTable header={tableHeader} values={tableValue} />
+
+        <ButtonComponent
+          text={buttonText}
+          onClick={() => navigate(`${buttonUrl}`)}
+        />
+      </Box>
+    );
   };
-
-  useEffect(() => {
-    requestSurvey();
-    console.log(survey);
-  }, []);
-
-  const serviceTableHeader = [
-    { text: "ID" },
-    { text: "ID do usuário" },
-    { text: "Criado em" },
-    { text: "Finalizado em" },
-  ];
-
-  const userTableHeader = [
-    { text: "ID" },
-    { text: "Nome" },
-    { text: "Celular" },
-    { text: "Criado em" },
-  ];
-
-  const surveyTableHeader = [
-    { text: "ID" },
-    { text: "Enquete" },
-    { text: "Assunto" },
-    { text: "Votos" },
-    { text: "Enviada" },
-  ];
 
   return (
     <Container>
@@ -129,52 +136,21 @@ function Dashboard() {
             gap={2}
             padding={0.5}
           >
-            <Box
-              width={1}
-              py={1}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              gap={1}
-              borderLeft="1px solid #1b1e1f"
-              borderRadius={1}
-              bgcolor="#0E1011"
-            >
-              <Typography variant="h6" color="white">
-                Usuários cadastrados
-              </Typography>
+            {createTable(
+              "Usuários cadastrados",
+              userTableHeader,
+              users,
+              "Ir para página de usuários",
+              "/users"
+            )}
 
-              <CustomTable header={userTableHeader} values={users} />
-
-              <ButtonComponent
-                text="Ir para página de usuários"
-                onClick={() => navigate("/users")}
-              />
-            </Box>
-
-            <Box
-              width={1}
-              py={1}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              gap={1}
-              borderLeft="1px solid #1b1e1f"
-              borderRadius={1}
-              bgcolor="#0E1011"
-            >
-              <Typography variant="h6" color="white">
-                Atendimentos realizados
-              </Typography>
-
-              <CustomTable
-                header={serviceTableHeader}
-                values={services}
-                onClick={() => navigate("/services")}
-              />
-
-              <ButtonComponent text="Ir para página de atendimentos" />
-            </Box>
+            {createTable(
+              "Atendimentos realizados",
+              serviceTableHeader,
+              services,
+              "Ir para página de atendimentos",
+              "/services"
+            )}
           </Box>
 
           <Box
@@ -186,12 +162,15 @@ function Dashboard() {
             gap={1}
           >
             <Box
+              width={1}
+              py={1}
               display="flex"
               flexDirection="column"
               alignItems="center"
+              gap={1}
+              borderLeft="1px solid #1b1e1f"
               borderRadius={1}
               bgcolor="#0E1011"
-              py={1}
             >
               <Box
                 display="flex"

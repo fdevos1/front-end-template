@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-
-import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table/Table";
-import SearchbarComponent from "../../components/Searchbar";
-
 import { Box, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { Container, Content } from "./styles";
 
-import SearchIcon from "@mui/icons-material/Search";
+import Sidebar from "../../components/Sidebar";
+import CustomTable from "../../components/Table";
+import SearchbarComponent from "../../components/Searchbar";
 
 import { getServices } from "../../services/services";
 
+import { serviceTableHeader } from "../../utils/TableHeader";
+
 function ServiceTable() {
   const [services, setServices] = useState([]);
-
-  moment.locale("pt-br");
 
   const requestServices = async () => {
     const fetchServices = await getServices();
@@ -26,14 +23,6 @@ function ServiceTable() {
   useEffect(() => {
     requestServices();
   }, []);
-
-  const tableHeader = [
-    { text: "ID" },
-    { text: "ID do usuário" },
-    { text: "Criado em" },
-    { text: "Finalizado em" },
-    { text: "" },
-  ];
 
   return (
     <Container>
@@ -63,7 +52,7 @@ function ServiceTable() {
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1, overflow: "auto" }}>
-          <CustomTable header={tableHeader} values={services} />
+          <CustomTable header={serviceTableHeader} values={services} />
         </Box>
       </Content>
     </Container>

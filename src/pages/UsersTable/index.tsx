@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
-
 import { Box, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { Container, Content } from "./styles";
 
-import SearchIcon from "@mui/icons-material/Search";
+import Sidebar from "../../components/Sidebar";
+import CustomTable from "../../components/Table";
+import SearchbarComponent from "../../components/Searchbar";
+
+import { userTableHeader } from "../../utils/TableHeader";
 
 import { getUser } from "../../services/user";
-import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table/Table";
-import SearchbarComponent from "../../components/Searchbar";
 
 function UsersTable() {
   const [users, setUsers] = useState([]);
-
-  moment.locale("pt-br");
 
   const requestUsers = async () => {
     const fetchUsers = await getUser();
@@ -25,14 +23,6 @@ function UsersTable() {
   useEffect(() => {
     requestUsers();
   }, []);
-
-  const tableHeader = [
-    { text: "ID" },
-    { text: "Nome" },
-    { text: "Celular" },
-    { text: "Criado em" },
-    { text: "" },
-  ];
 
   return (
     <Container>
@@ -62,7 +52,7 @@ function UsersTable() {
           </Box>
         </Box>
         <Box sx={{ width: 1, height: 1 }}>
-          <CustomTable header={tableHeader} values={users} />
+          <CustomTable header={userTableHeader} values={users} />
         </Box>
       </Content>
     </Container>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Sidebar from "../../components/Sidebar";
-import CustomTable from "../../components/Table/Table";
+import CustomTable from "../../components/Table";
 import SearchbarComponent from "../../components/Searchbar";
 
 import { useForm } from "react-hook-form";

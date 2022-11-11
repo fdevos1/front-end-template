@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
+import { Box, TextField, Typography } from "@mui/material";
 
 import { Container, Content, LoginSide } from "./styles";
 
-import { Box, TextField, Typography } from "@mui/material";
+import ButtonComponent from "../../components/Button";
 
 import { AuthContext } from "../../context/auth";
-
-import ButtonComponent from "../../components/Button";
 
 function Login() {
   const { signIn }: any = useContext(AuthContext);
@@ -17,7 +16,6 @@ function Login() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.log("submit", { email, password });
     signIn(email, password);
   };
 
@@ -39,7 +37,7 @@ function Login() {
         >
           <Typography variant="h4">Olá, seja bem vindo</Typography>
           <Typography variant="caption" sx={{ color: "#8D8D8D" }}>
-            Para visualizar a tabela de usuário realize seu login abaixo
+            Por favor realize o login para ter acesso ao sistema.
           </Typography>
         </Box>
 
