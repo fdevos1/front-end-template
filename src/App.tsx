@@ -14,6 +14,7 @@ import UsersTable from "./pages/UsersTable";
 import ServiceTable from "./pages/ServicesTable";
 import Dashboard from "./pages/Dashboard";
 import GroupManagement from "./pages/GroupManagement";
+import SurveyManagement from "./pages/SurveyManagement";
 
 function App() {
   const Private = ({ children }: any) => {
@@ -54,9 +55,31 @@ function App() {
             }
           />
 
-          <Route path="/services" element={<ServiceTable />} />
+          <Route
+            path="/services"
+            element={
+              <Private>
+                <ServiceTable />
+              </Private>
+            }
+          />
 
-          <Route path="/group-management" element={<GroupManagement />} />
+          <Route
+            path="/group-management"
+            element={
+              <Private>
+                <GroupManagement />
+              </Private>
+            }
+          />
+          <Route
+            path="/survey"
+            element={
+              <Private>
+                <SurveyManagement />
+              </Private>
+            }
+          />
         </Switch>
       </AuthProvider>
     </BrowserRouter>

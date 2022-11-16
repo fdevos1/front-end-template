@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Box, IconButton, Typography, Divider } from "@mui/material";
 
@@ -6,23 +6,19 @@ import { Container } from "./styles";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import LogoutIcon from "@mui/icons-material/Logout";
-
-import { AuthContext } from "../../context/auth";
-
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
 import GroupsIcon from "@mui/icons-material/Groups";
+import ArticleIcon from "@mui/icons-material/Article";
 
-interface IButtonsSidebar {
-  text: string;
-  id: number;
-  image: JSX.Element;
-  url: string;
-}
+import { AuthContext } from "../../context/auth";
+import { IButtonsSidebar } from "../../types/SidebarTypes";
 
 function Sidebar() {
   const { signOut }: any = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
+  const [delayHandler, setDelayHandler] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,6 +47,12 @@ function Sidebar() {
       image: <GroupsIcon />,
       url: "/group-management",
     },
+    {
+      text: "Enquetes",
+      id: 4,
+      image: <ArticleIcon />,
+      url: "/survey",
+    },
   ];
 
   const handleChangeRoute = (url: string) => {
@@ -59,18 +61,32 @@ function Sidebar() {
 
   return (
     <>
-      <Container>
+      <Container
+        onMouseEnter={() => setTimeout(() => setOpen(true), 400)}
+        onMouseLeave={() => setTimeout(() => setOpen(false), 100)}
+      >
         <Box
           height={1}
           width={1}
           display="flex"
           flexDirection="column"
           justifyContent={"space-between"}
-          alignItems="center"
+          className={`${open ? "open" : "closed"}`}
+          borderRight="1px solid #1b1e1f"
           p={1}
         >
-          <Box display="flex" alignItems="center">
-            <Typography className="pandorga">PANDORGA</Typography>
+          <Box display="flex" justifyContent="center" width={1}>
+            {open === true ? (
+              <Typography className={`pandorga ${open ? "full-title" : ""}`}>
+                PANDORGA
+              </Typography>
+            ) : (
+              <Typography
+                className={`pandorga ${!open ? "initial-letter" : ""}`}
+              >
+                P
+              </Typography>
+            )}
           </Box>
 
           <Box height={1} py={1}>
@@ -85,7 +101,14 @@ function Sidebar() {
               <Typography variant="caption" color="#2C2E2F" marginX={2}>
                 Menu
               </Typography>
-              <Box display="flex" flexDirection="column" width={1} gap={2}>
+
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap={2}
+                position="fixed"
+                mt={2}
+              >
                 {buttonsSidebar.map((button: IButtonsSidebar) => {
                   return (
                     <Box
@@ -108,7 +131,7 @@ function Sidebar() {
                                 "&": {
                                   backgroundColor: "#1B1E1F",
                                   cursor: "pointer",
-                                  borderRadius: "1rem",
+                                  borderRadius: "0.25rem",
                                 },
                               },
                             ]
@@ -117,7 +140,7 @@ function Sidebar() {
                                 "&:hover": {
                                   cursor: "pointer",
                                   backgroundColor: "#232324",
-                                  borderRadius: "1rem",
+                                  borderRadius: "0.25rem",
                                   color: "#f0f0f0",
                                 },
                               },
@@ -125,7 +148,14 @@ function Sidebar() {
                       }
                     >
                       {button.image}
-                      <Typography variant="body2">{button.text}</Typography>
+                      {open === true ? (
+                        <Typography
+                          className={open ? "text-open" : "text-closed"}
+                          variant="body2"
+                        >
+                          {button.text}
+                        </Typography>
+                      ) : null}
                     </Box>
                   );
                 })}
@@ -133,7 +163,7 @@ function Sidebar() {
             </Box>
             <Divider color="#1B1E1F" />
           </Box>
-          <Box>
+          <Box alignSelf="center">
             <Box>
               <IconButton
                 onClick={handleLogout}
