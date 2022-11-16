@@ -13,14 +13,16 @@ export const Container = styled.div`
     color: white;
   }
 
-  .pandorga.full-title {
-    transition: all 0.4s;
+  .logo {
+    height: 100%;
   }
 
-  .pandorga.initial-letter {
-    width: 2rem;
+  .pandorga-logo {
+    height: 100%;
+  }
 
-    text-align: center;
+  .header-box {
+    transition: all 0.5s;
   }
 
   .open {
@@ -30,18 +32,36 @@ export const Container = styled.div`
   }
 
   .closed {
-    width: 5rem;
-
     transition: all 0.2s ease-in;
+
+    text-align: center;
   }
 
   .text-open {
     opacity: 1;
     transition: all 0.5s;
+    transition: opacity 1s;
   }
 
   .text-closed {
     opacity: 0;
     transition: all 0.5s;
+    transition: opacity 0.4s;
+  }
+
+  .opened-div {
+    width: 100%;
+
+    transition: all 0.5s;
+  }
+
+  .closed-div {
+    width: 30%;
+
+    transition: all 0.5s;
+  }
+
+  img {
+    transition: all 0.4s;
   }
 `;

@@ -15,10 +15,11 @@ import ArticleIcon from "@mui/icons-material/Article";
 import { AuthContext } from "../../context/auth";
 import { IButtonsSidebar } from "../../types/SidebarTypes";
 
+import Logo from "../../assets/images/logo.png";
+
 function Sidebar() {
   const { signOut }: any = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [delayHandler, setDelayHandler] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -62,8 +63,8 @@ function Sidebar() {
   return (
     <>
       <Container
-        onMouseEnter={() => setTimeout(() => setOpen(true), 400)}
-        onMouseLeave={() => setTimeout(() => setOpen(false), 100)}
+        onMouseEnter={() => setTimeout(() => setOpen(true), 100)}
+        onMouseLeave={() => setOpen(false)}
       >
         <Box
           height={1}
@@ -75,18 +76,24 @@ function Sidebar() {
           borderRight="1px solid #1b1e1f"
           p={1}
         >
-          <Box display="flex" justifyContent="center" width={1}>
-            {open === true ? (
-              <Typography className={`pandorga ${open ? "full-title" : ""}`}>
-                PANDORGA
-              </Typography>
-            ) : (
-              <Typography
-                className={`pandorga ${!open ? "initial-letter" : ""}`}
-              >
-                P
-              </Typography>
-            )}
+          <Box>
+            <Box
+              display="flex"
+              justifyContent="center"
+              width={open ? "17rem" : "5rem"}
+              height={30}
+              className="header-box"
+            >
+              {open ? (
+                <Box height={1}>
+                  <img src={Logo} alt="logo" className="logo" />
+                </Box>
+              ) : (
+                <Box height={1}>
+                  <img src={Logo} alt="logo" className="logo" />
+                </Box>
+              )}
+            </Box>
           </Box>
 
           <Box height={1} py={1}>
@@ -121,6 +128,7 @@ function Sidebar() {
                       p={2}
                       key={button.id}
                       whiteSpace={"nowrap"}
+                      className={open ? "opened-div" : "closed-div"}
                       color={
                         location.pathname === button.url ? "white" : "#585A5C"
                       }
@@ -148,14 +156,13 @@ function Sidebar() {
                       }
                     >
                       {button.image}
-                      {open === true ? (
-                        <Typography
-                          className={open ? "text-open" : "text-closed"}
-                          variant="body2"
-                        >
-                          {button.text}
-                        </Typography>
-                      ) : null}
+
+                      <Typography
+                        className={open ? "text-open" : "text-closed"}
+                        variant="body2"
+                      >
+                        {button.text}
+                      </Typography>
                     </Box>
                   );
                 })}

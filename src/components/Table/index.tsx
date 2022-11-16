@@ -127,7 +127,14 @@ function CustomTable(props: any) {
             };
 
             return (
-              <StyledTableRow key={index}>
+              <StyledTableRow
+                key={index}
+                onClick={
+                  location.pathname === "/survey"
+                    ? props.selectedSurvey
+                    : console.log("entrou aqui")
+                }
+              >
                 <StyledTableCell
                   align="center"
                   variant="body"
@@ -163,8 +170,8 @@ function CustomTable(props: any) {
                   <Typography variant="body2">
                     {item?.cellphone ||
                       item?.subject ||
-                      moment(item.created_at).format("DD/MM/YY - HH:mm") ||
-                      item?.survey_subject}
+                      item?.survey_subject ||
+                      moment(item?.created_at).format("DD/MM/YY - HH:mm")}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell

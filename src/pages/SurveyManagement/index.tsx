@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { Container, Content } from "./styles";
 
@@ -7,9 +7,19 @@ import Sidebar from "../../components/Sidebar";
 import CustomTable from "../../components/Table";
 
 import { surveyTableHeader } from "../../utils/TableHeader";
+import SurveyComponent from "../../components/Survey";
+
+interface ISurveyType {
+  survey_id: number;
+  survey: string;
+  survey_subject: string;
+  votes: number;
+  sended: boolean;
+}
 
 function SurveyManagement() {
-  const [survey, setSurvey] = useState<any[]>([]);
+  const [survey, setSurvey] = useState<ISurveyType[]>([]);
+  const [selectedSurvey, setSelectedSurvey] = useState<ISurveyType | any>();
 
   const mockSurveyData = [
     {
@@ -58,13 +68,38 @@ function SurveyManagement() {
     getSurvey();
   }, []);
 
+  const handleSelectedSurvey = (e: any) => {
+    const clickedSurvey = e.target.outerText;
+
+    const surveyFiltered = survey.filter(
+      (item: ISurveyType) => item.survey === clickedSurvey
+    );
+
+    setSelectedSurvey(surveyFiltered);
+    console.log(selectedSurvey);
+    return;
+  };
+
   return (
     <Container>
       <Sidebar />
       <Content>
         <Box display="flex" width={1} height={1} alignItems="center">
           <Box width="30%" height={1} borderRight="1px solid #1b1e1f">
-            <CustomTable values={survey} header={surveyTableHeader} />\
+            <CustomTable
+              values={survey}
+              header={surveyTableHeader}
+              selectedSurvey={handleSelectedSurvey}
+            />
+          </Box>
+          <Box
+            width="70%"
+            height={1}
+            display="flex"
+            flexDirection="column"
+            mt={4}
+          >
+            <SurveyComponent survey={selectedSurvey} />
           </Box>
         </Box>
       </Content>
