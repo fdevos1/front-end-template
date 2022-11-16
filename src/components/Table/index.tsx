@@ -44,6 +44,16 @@ function CustomTable(props: any) {
     setPage(0);
   };
 
+  const handleSelectedSurvey = (survey: any) => {
+    if (location.pathname === "/survey") {
+      const { selectedSurvey } = props;
+
+      selectedSurvey(survey);
+    } else {
+      return;
+    }
+  };
+
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.values.length) : 0;
 
@@ -129,11 +139,7 @@ function CustomTable(props: any) {
             return (
               <StyledTableRow
                 key={index}
-                onClick={
-                  location.pathname === "/survey"
-                    ? props.selectedSurvey
-                    : console.log("entrou aqui")
-                }
+                onClick={() => handleSelectedSurvey(item)}
               >
                 <StyledTableCell
                   align="center"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { Container, Content } from "./styles";
 
@@ -19,7 +19,7 @@ interface ISurveyType {
 
 function SurveyManagement() {
   const [survey, setSurvey] = useState<ISurveyType[]>([]);
-  const [selectedSurvey, setSelectedSurvey] = useState<ISurveyType | any>();
+  const [selectedSurvey, setSelectedSurvey] = useState<any>(null);
 
   const mockSurveyData = [
     {
@@ -68,16 +68,16 @@ function SurveyManagement() {
     getSurvey();
   }, []);
 
-  const handleSelectedSurvey = (e: any) => {
-    const clickedSurvey = e.target.outerText;
+  const handleSelectedSurvey = (survey: ISurveyType) => {
+    const clickedSurvey = survey;
 
-    const surveyFiltered = survey.filter(
-      (item: ISurveyType) => item.survey === clickedSurvey
-    );
-
-    setSelectedSurvey(surveyFiltered);
-    console.log(selectedSurvey);
-    return;
+    if (clickedSurvey) {
+      setSelectedSurvey(clickedSurvey);
+      console.log(selectedSurvey);
+    } else {
+      console.log("Não entrou");
+      return;
+    }
   };
 
   return (
