@@ -50,13 +50,13 @@ export const Container = styled.div`
   }
 
   .opened-div {
-    width: 100%;
+    width: 15rem;
 
     transition: all 0.5s;
   }
 
   .closed-div {
-    width: 30%;
+    width: 5rem;
 
     transition: all 0.5s;
   }

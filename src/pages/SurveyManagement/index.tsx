@@ -8,6 +8,7 @@ import CustomTable from "../../components/Table";
 
 import { surveyTableHeader } from "../../utils/TableHeader";
 import SurveyComponent from "../../components/Survey";
+import { getSurvey } from "../../services/survey";
 
 interface ISurveyType {
   survey_id: number;
@@ -21,51 +22,13 @@ function SurveyManagement() {
   const [survey, setSurvey] = useState<ISurveyType[]>([]);
   const [selectedSurvey, setSelectedSurvey] = useState<any>(null);
 
-  const mockSurveyData = [
-    {
-      survey_id: 0,
-      survey: "O grêmio vai sair campeão?",
-      survey_subject: "Esporte",
-      votes: 0,
-      sended: false,
-    },
-    {
-      survey_id: 1,
-      survey: "Quantos graus faz hoje?",
-      survey_subject: "Clima/tempo",
-      votes: 0,
-      sended: false,
-    },
-    {
-      survey_id: 2,
-      survey: "Quanto é 27+2?",
-      survey_subject: "Matemática básica",
-      votes: 9,
-      sended: true,
-    },
-    {
-      survey_id: 3,
-      survey: "O que é, o que é, alguma coisa",
-      survey_subject: "O que é, o que é",
-      votes: 16,
-      sended: true,
-    },
-    {
-      survey_id: 4,
-      survey: "Top 3 gols do Neymar?",
-      survey_subject: "Esporte",
-      votes: 89,
-      sended: true,
-    },
-  ];
-
-  const getSurvey = async () => {
-    const fetchSurvey = mockSurveyData;
+  const requestSurvey = async () => {
+    const fetchSurvey = await getSurvey();
     setSurvey(fetchSurvey);
   };
 
   useEffect(() => {
-    getSurvey();
+    requestSurvey();
   }, []);
 
   const handleSelectedSurvey = (survey: ISurveyType) => {
@@ -85,7 +48,12 @@ function SurveyManagement() {
       <Sidebar />
       <Content>
         <Box display="flex" width={1} height={1} alignItems="center">
-          <Box width="30%" height={1} borderRight="1px solid #1b1e1f">
+          <Box
+            width="30%"
+            height={1}
+            borderRight="1px solid #1b1e1f"
+            borderLeft="1px solid #1b1e1f"
+          >
             <CustomTable
               values={survey}
               header={surveyTableHeader}

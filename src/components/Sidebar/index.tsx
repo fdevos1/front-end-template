@@ -62,10 +62,7 @@ function Sidebar() {
 
   return (
     <>
-      <Container
-        onMouseEnter={() => setTimeout(() => setOpen(true), 100)}
-        onMouseLeave={() => setOpen(false)}
-      >
+      <Container>
         <Box
           height={1}
           width={1}
@@ -75,6 +72,8 @@ function Sidebar() {
           className={`${open ? "open" : "closed"}`}
           borderRight="1px solid #1b1e1f"
           p={1}
+          onMouseEnter={() => setTimeout(() => setOpen(true), 100)}
+          onMouseLeave={() => setOpen(false)}
         >
           <Box>
             <Box
@@ -115,6 +114,7 @@ function Sidebar() {
                 gap={2}
                 position="fixed"
                 mt={2}
+                className={open ? "opened-div" : "closed-div"}
               >
                 {buttonsSidebar.map((button: IButtonsSidebar) => {
                   return (
@@ -128,7 +128,6 @@ function Sidebar() {
                       p={2}
                       key={button.id}
                       whiteSpace={"nowrap"}
-                      className={open ? "opened-div" : "closed-div"}
                       color={
                         location.pathname === button.url ? "white" : "#585A5C"
                       }

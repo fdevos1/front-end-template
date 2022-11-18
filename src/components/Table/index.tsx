@@ -121,9 +121,9 @@ function CustomTable(props: any) {
             };
 
             const sendedSurvey = () => {
-              if (item.sended === false) {
+              if (item.survey_sended === false) {
                 return <ButtonComponent text="enviar" />;
-              } else if (item.sended === true) {
+              } else if (item.survey_sended === true) {
                 return "enviado";
               }
             };
@@ -164,7 +164,7 @@ function CustomTable(props: any) {
                     {item?.name ||
                       item?.user_cellphone ||
                       item?.group_name ||
-                      item?.survey}
+                      item?.survey_text}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell

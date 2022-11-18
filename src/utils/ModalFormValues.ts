@@ -4,21 +4,21 @@ const surveyFormInputs = [
     type: "text",
     title: "Enquete",
     placeholder: "Insira a pergunta da enquete aqui",
-    name: "survey",
+    name: "survey_text",
   },
   {
     id: 1,
     type: "text",
     title: "Assunto",
     placeholder: "Insira o assunto da enquete aqui",
-    name: "subject",
+    name: "survey_subject",
   },
   {
     id: 2,
     type: "answer",
     title: "Respostas",
     placeholder: "Resposta da enquete",
-    name: "answer",
+    name: `answer_text`,
   },
 ];
 

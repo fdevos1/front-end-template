@@ -7,9 +7,16 @@ import { Container, Content } from "./styles";
 import CustomTable from "../../components/Table";
 import ButtonComponent from "../../components/Button";
 import Sidebar from "../../components/Sidebar";
+import CustomModal from "../../components/Modal";
 
 import { getServices } from "../../services/services";
 import { getUser } from "../../services/user";
+import {
+  createSurvey,
+  createSurveyAnswer,
+  getLastSurvey,
+  getSurvey,
+} from "../../services/survey";
 
 import {
   serviceTableHeader,
@@ -19,7 +26,8 @@ import {
 
 import { IUserTypes } from "../../types/UserTypes";
 import { IServiceTypes } from "../../types/ServiceTypes";
-import CustomModal from "../../components/Modal";
+import { ISurveyType } from "../../types/SurveyTypes";
+
 import { surveyFormInputs } from "../../utils/ModalFormValues";
 
 function Dashboard() {
@@ -36,7 +44,7 @@ function Dashboard() {
     const fetchService = await getServices();
     setServices(fetchService);
 
-    const fetchSurvey = mockSurveyData;
+    const fetchSurvey = await getSurvey();
     setSurvey(fetchSurvey);
 
     const fetchUsers = await getUser();
@@ -47,43 +55,51 @@ function Dashboard() {
     listServices();
   }, []);
 
-  const mockSurveyData = [
-    {
-      survey_id: 0,
-      survey: "O grêmio vai sair campeão?",
-      survey_subject: "Esporte",
-      votes: 0,
-      sended: false,
-    },
-    {
-      survey_id: 1,
-      survey: "Quantos graus faz hoje?",
-      survey_subject: "Clima/tempo",
-      votes: 0,
-      sended: false,
-    },
-    {
-      survey_id: 2,
-      survey: "Quanto é 27+2?",
-      survey_subject: "Matemática básica",
-      votes: 9,
-      sended: true,
-    },
-    {
-      survey_id: 3,
-      survey: "O que é, o que é, alguma coisa",
-      survey_subject: "O que é, o que é",
-      votes: 16,
-      sended: true,
-    },
-    {
-      survey_id: 4,
-      survey: "Top 3 gols do Neymar?",
-      survey_subject: "Esporte",
-      votes: 89,
-      sended: true,
-    },
-  ];
+  const onSubmit = async (data: any) => {
+    const {
+      survey_text,
+      survey_subject,
+      answer_text,
+      answer_text_2,
+      answer_text_3,
+    }: any = data;
+
+    const surveyJson = {
+      survey_text: survey_text,
+      survey_subject: survey_subject,
+    };
+
+    await createSurvey(surveyJson);
+
+    let lastSurveyCreated: ISurveyType | null = await getLastSurvey();
+    console.log("ultima enquete criada", lastSurveyCreated);
+
+    if (lastSurveyCreated) {
+      console.log("entrou no if");
+
+      const answerList = [
+        {
+          id_from_survey: lastSurveyCreated.survey_id,
+          answer_text,
+        },
+        {
+          id_from_survey: lastSurveyCreated.survey_id,
+          answer_text: answer_text_2,
+        },
+        {
+          id_from_survey: lastSurveyCreated.survey_id,
+          answer_text: answer_text_3,
+        },
+      ];
+
+      console.log("objeto das respostas", answerList);
+
+      await createSurveyAnswer(answerList);
+    }
+
+    lastSurveyCreated = null;
+    setOpen(false);
+  };
 
   const createTable = (
     tableTitle: string,
@@ -188,11 +204,14 @@ function Dashboard() {
                   onClick={() => setOpen(true)}
                 />
               </Box>
-              <Box>
+              <Box width={1}>
                 <CustomTable header={surveyTableHeader} values={survey} />
               </Box>
 
-              <ButtonComponent text="Ir para página de enquetes" />
+              <ButtonComponent
+                text="Ir para página de enquetes"
+                onClick={() => navigate("/survey")}
+              />
             </Box>
           </Box>
         </Box>
@@ -202,6 +221,7 @@ function Dashboard() {
           setState={setOpen}
           title={"Criar enquete"}
           formValues={surveyFormInputs}
+          onSubmit={onSubmit}
         />
       </Content>
     </Container>

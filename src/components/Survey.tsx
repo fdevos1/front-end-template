@@ -41,7 +41,7 @@ function SurveyComponent({ survey }: any) {
                   borderRadius={2}
                 >
                   <Typography variant="body2" color="white">
-                    {survey.survey}
+                    {survey.survey_text}
                   </Typography>
                 </Box>
               </Box>
@@ -98,56 +98,60 @@ function SurveyComponent({ survey }: any) {
                 width={1}
                 height={1}
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="space-around"
                 py={1}
               >
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  width="25%"
-                  height={1}
-                >
-                  <Box
-                    width={1}
-                    height={40}
-                    borderRadius="8px 8px 0 0"
-                    border="2px solid #1b1e1f"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Typography variant="button" color="white">
-                      Muito
-                    </Typography>
-                  </Box>
-                  <Box
-                    width={1}
-                    height={1}
-                    border="1px solid #1b1e1f"
-                    borderTop="0"
-                    borderRadius="0 0 8px 8px"
-                    textAlign="center"
-                    gap={1}
-                  >
+                {survey.survey_votes.map((item: any) => {
+                  return (
                     <Box
-                      width={1}
-                      height={1}
-                      maxHeight={40}
-                      minHeight={32}
                       display="flex"
                       flexDirection="column"
-                      justifyContent="space-evenly"
+                      width="25%"
+                      height={1}
                     >
-                      <Typography variant="body2" color="white">
-                        Felipe Devos - 555180105521
-                      </Typography>
-                      <Divider
-                        variant="middle"
-                        sx={{ borderColor: "#1b1e1f" }}
-                      />
+                      <Box
+                        width={1}
+                        height={40}
+                        borderRadius="8px 8px 0 0"
+                        border="2px solid #1b1e1f"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                      >
+                        <Typography variant="button" color="white">
+                          {item.answer_text}
+                        </Typography>
+                      </Box>
+                      <Box
+                        width={1}
+                        height={1}
+                        border="1px solid #1b1e1f"
+                        borderTop="0"
+                        borderRadius="0 0 8px 8px"
+                        textAlign="center"
+                        gap={1}
+                      >
+                        <Box
+                          width={1}
+                          height={1}
+                          maxHeight={40}
+                          minHeight={32}
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="space-evenly"
+                        >
+                          <Typography variant="body2" color="white">
+                            Felipe Devos - 555180105521
+                          </Typography>
+                          <Divider
+                            variant="middle"
+                            sx={{ borderColor: "#1b1e1f" }}
+                          />
+                        </Box>
+                      </Box>
                     </Box>
-                  </Box>
-                </Box>
+                  );
+                })}
               </Box>
             </Box>
           </Box>

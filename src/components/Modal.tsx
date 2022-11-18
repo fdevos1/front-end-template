@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Modal,
-  Fade,
-  Backdrop,
-  Typography,
-  Input,
-  SelectChangeEvent,
-} from "@mui/material";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Box, Modal, Fade, Backdrop, Typography, Input } from "@mui/material";
 
 import ButtonComponent from "./Button";
 
-function CustomModal({ setState, open, title, formValues }: any) {
+function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -25,15 +18,14 @@ function CustomModal({ setState, open, title, formValues }: any) {
     p: 4,
   };
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const handleClose = () => setState(false);
-
-  const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-  };
-
-  const onSubmit = (data: any) => {
-    setState(false);
-  };
 
   return (
     <Modal
@@ -49,7 +41,7 @@ function CustomModal({ setState, open, title, formValues }: any) {
         <Box sx={style}>
           <Typography variant="h4">{title}</Typography>
           <Box p={2}>
-            <Box component="form" onSubmit={onSubmit} py={2}>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} py={2}>
               <Box
                 display="flex"
                 flexDirection="column"
@@ -58,36 +50,50 @@ function CustomModal({ setState, open, title, formValues }: any) {
                 height={1}
               >
                 {formValues.map((item: any) => {
-                  if (item.type === "text") {
-                    return (
-                      <Box display="flex" flexDirection="column" width={1}>
-                        <Typography variant="caption">{item.title}</Typography>
-                        <Input
-                          required
-                          fullWidth
-                          placeholder={item.placeholder}
-                        />
-                      </Box>
-                    );
-                  }
-
-                  if (item.type === "answer") {
-                    return (
-                      <Box width={1}>
-                        <Typography variant="caption">{item.title}</Typography>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          gap={1}
-                          width="75%"
-                        >
-                          <Input required placeholder={item.placeholder} />
-                          <Input required placeholder={item.placeholder} />
-                          <Input placeholder="Opcional" />
+                  return (
+                    <>
+                      {item.type === "text" ? (
+                        <Box display="flex" flexDirection="column" width={1}>
+                          <Typography variant="caption">
+                            {item.title}
+                          </Typography>
+                          <Input
+                            required
+                            fullWidth
+                            placeholder={item.placeholder}
+                            inputProps={register(item.name)}
+                          />
                         </Box>
-                      </Box>
-                    );
-                  }
+                      ) : item.type === "answer" ? (
+                        <Box width={1}>
+                          <Typography variant="caption">
+                            {item.title}
+                          </Typography>
+                          <Box
+                            display="flex"
+                            flexDirection="column"
+                            gap={1}
+                            width="75%"
+                          >
+                            <Input
+                              inputProps={register(`${item.name}`)}
+                              required
+                              placeholder={item.placeholder}
+                            />
+                            <Input
+                              inputProps={register(`${item.name}_2`)}
+                              required
+                              placeholder={item.placeholder}
+                            />
+                            <Input
+                              inputProps={register(`${item.name}_3`)}
+                              placeholder="Opcional"
+                            />
+                          </Box>
+                        </Box>
+                      ) : null}
+                    </>
+                  );
                 })}
                 <Box
                   sx={{
