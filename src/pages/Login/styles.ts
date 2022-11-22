@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100%;
   overflow: hidden;
   align-items: center;
-  background-color: #fff;
+  background-color: #121212;
   padding: 1rem;
 `;
 
@@ -14,7 +14,7 @@ export const Content = styled.div`
   display: flex;
   width: 60%;
   height: 100%;
-  background-color: #000;
+  background-color: #242526;
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
@@ -33,7 +33,7 @@ export const LoginSide = styled.div`
   flex-direction: column;
   width: 40%;
   height: 100%;
-  background-color: #fff;
+  background-color: #121212;
   border-radius: 0.5rem;
   align-items: center;
   justify-content: center;

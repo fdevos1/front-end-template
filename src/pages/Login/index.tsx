@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Box, TextField, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
 import { Container, Content, LoginSide } from "./styles";
 
@@ -19,6 +20,20 @@ function Login() {
     signIn(email, password);
   };
 
+  const LoginInput = styled(TextField)({
+    "& label": {
+      color: "#e4e6eb",
+    },
+
+    "& label.Mui-focused": {
+      color: "#b0b3b8",
+    },
+
+    "& fieldset": {
+      borderColor: "#e4e6eb",
+    },
+  });
+
   return (
     <Container>
       <Content>
@@ -35,8 +50,10 @@ function Login() {
             gap: "0.5rem",
           }}
         >
-          <Typography variant="h4">Olá, seja bem vindo</Typography>
-          <Typography variant="caption" sx={{ color: "#8D8D8D" }}>
+          <Typography variant="h4" sx={{ color: "#fff" }}>
+            Olá, seja bem vindo
+          </Typography>
+          <Typography variant="caption" sx={{ color: "#fff" }}>
             Por favor realize o login para ter acesso ao sistema.
           </Typography>
         </Box>
@@ -61,6 +78,11 @@ function Login() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setEmail(e.target.value)
                 }
+                sx={{
+                  input: { color: "#e4e6eb" },
+                  label: { color: "#b0b3b8 " },
+                  fieldset: { borderColor: "#b0b3b8" },
+                }}
               />
               <TextField
                 fullWidth
@@ -71,6 +93,11 @@ function Login() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPassword(e.target.value)
                 }
+                sx={{
+                  input: { color: "#e4e6eb" },
+                  label: { color: "#b0b3b8 " },
+                  fieldset: { borderColor: "#b0b3b8" },
+                }}
               />
             </Box>
 
@@ -80,6 +107,10 @@ function Login() {
                 variant="contained"
                 type="submit"
                 text="Entrar"
+                sx={{
+                  backgroundColor: "#242526",
+                  "&:hover": { backgroundColor: "#3a3b3c" },
+                }}
               />
             </Box>
           </form>

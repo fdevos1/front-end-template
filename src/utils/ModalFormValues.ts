@@ -20,6 +20,13 @@ const surveyFormInputs = [
     placeholder: "Resposta da enquete",
     name: `answer_text`,
   },
+  {
+    id: 3,
+    type: "date_picker",
+    title: "Horário de envio",
+    placeholder: "Horário de envio da enquete",
+    name: "survey_send_hour",
+  },
 ];
 
 export { surveyFormInputs };
