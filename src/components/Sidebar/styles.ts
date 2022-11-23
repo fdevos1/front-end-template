@@ -5,6 +5,8 @@ export const Container = styled.div`
 
   background-color: #101213;
 
+  padding: 0.5rem;
+
   .pandorga {
     font-family: "Gotham Black", sans-serif;
 
@@ -14,7 +16,7 @@ export const Container = styled.div`
   }
 
   .logo {
-    height: 100%;
+    height: 75%;
   }
 
   .pandorga-logo {
@@ -26,13 +28,17 @@ export const Container = styled.div`
   }
 
   .open {
-    width: 17rem;
+    width: 15rem;
 
-    transition: all 0.4s ease-in;
+    transition: all 0.6s ease-out;
+    transition: width 0.25s ease-out;
   }
 
   .closed {
-    transition: all 0.2s ease-in;
+    width: 5rem;
+
+    transition: all 0.4s ease-out;
+    transition: width 0.25s ease-out;
 
     text-align: center;
   }

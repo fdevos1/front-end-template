@@ -11,6 +11,7 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ArticleIcon from "@mui/icons-material/Article";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import { AuthContext } from "../../context/auth";
 import { IButtonsSidebar } from "../../types/SidebarTypes";
@@ -70,8 +71,6 @@ function Sidebar() {
           flexDirection="column"
           justifyContent={"space-between"}
           className={`${open ? "open" : "closed"}`}
-          borderRight="1px solid #1b1e1f"
-          p={1}
           onMouseEnter={() => setTimeout(() => setOpen(true), 100)}
           onMouseLeave={() => setOpen(false)}
         >
@@ -79,19 +78,12 @@ function Sidebar() {
             <Box
               display="flex"
               justifyContent="center"
-              width={open ? "17rem" : "5rem"}
               height={30}
               className="header-box"
             >
-              {open ? (
-                <Box height={1}>
-                  <img src={Logo} alt="logo" className="logo" />
-                </Box>
-              ) : (
-                <Box height={1}>
-                  <img src={Logo} alt="logo" className="logo" />
-                </Box>
-              )}
+              <Box height={1}>
+                <img src={Logo} alt="logo" className="logo" />
+              </Box>
             </Box>
           </Box>
 
@@ -104,7 +96,7 @@ function Sidebar() {
               height={1}
               py={1}
             >
-              <Typography variant="caption" color="#2C2E2F" marginX={2}>
+              <Typography variant="caption" color="#B0B3B8" align="left">
                 Menu
               </Typography>
 
@@ -113,7 +105,7 @@ function Sidebar() {
                 flexDirection="column"
                 gap={2}
                 position="fixed"
-                mt={2}
+                mt={4}
                 className={open ? "opened-div" : "closed-div"}
               >
                 {buttonsSidebar.map((button: IButtonsSidebar) => {
@@ -129,14 +121,14 @@ function Sidebar() {
                       key={button.id}
                       whiteSpace={"nowrap"}
                       color={
-                        location.pathname === button.url ? "white" : "#585A5C"
+                        location.pathname === button.url ? "#E4E6EB" : "#B0B3B8"
                       }
                       sx={
                         location.pathname === button.url
                           ? [
                               {
                                 "&": {
-                                  backgroundColor: "#1B1E1F",
+                                  backgroundColor: "rgba(58, 59, 60, 0.2)",
                                   cursor: "pointer",
                                   borderRadius: "0.25rem",
                                 },
@@ -146,9 +138,9 @@ function Sidebar() {
                               {
                                 "&:hover": {
                                   cursor: "pointer",
-                                  backgroundColor: "#232324",
+                                  backgroundColor: "#3A3B3C",
                                   borderRadius: "0.25rem",
-                                  color: "#f0f0f0",
+                                  color: "#B0B3B8",
                                 },
                               },
                             ]
@@ -167,6 +159,7 @@ function Sidebar() {
                 })}
               </Box>
             </Box>
+
             <Divider color="#1B1E1F" />
           </Box>
           <Box alignSelf="center">
@@ -176,17 +169,17 @@ function Sidebar() {
                 sx={[
                   {
                     "&:hover": {
-                      backgroundColor: "#f3f3f3",
+                      backgroundColor: "#3A3B3C",
                     },
                   },
                 ]}
               >
                 <LogoutIcon
-                  htmlColor="white"
+                  htmlColor="#B0B3B8"
                   sx={[
                     {
                       "&:hover": {
-                        color: "black",
+                        color: "#E4E6EB",
                       },
                     },
                   ]}

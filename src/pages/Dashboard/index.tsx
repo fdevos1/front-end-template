@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
-
-import { Container, Content } from "./styles";
+import { Grid, Box, Typography } from "@mui/material";
 
 import CustomTable from "../../components/Table";
 import ButtonComponent from "../../components/Button";
@@ -29,16 +27,19 @@ import { IServiceTypes } from "../../types/ServiceTypes";
 import { ISurveyType } from "../../types/SurveyTypes";
 
 import { surveyFormInputs } from "../../utils/ModalFormValues";
+import DashboardCard from "../../components/DashboardCard";
+import { dashboardCardsValues } from "../../utils/DashboardCards";
+import { IDashboardCardsTypes } from "../../types/DashboardTypes";
+import TabsComponent from "../../components/Tabs";
 
 function Dashboard() {
   const [services, setServices] = useState<IServiceTypes[]>([]);
   const [users, setUsers] = useState<IUserTypes[]>([]);
   const [survey, setSurvey] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
 
   const navigate = useNavigate();
-
-  const loggedUser = localStorage.getItem("user_name");
 
   const listServices = async () => {
     const fetchService = await getServices();
@@ -54,6 +55,10 @@ function Dashboard() {
   useEffect(() => {
     listServices();
   }, []);
+
+  const handleChangeTab = (e: any, newValue: number) => {
+    setActiveTab(newValue);
+  };
 
   const onSubmit = async (data: any) => {
     const {
@@ -101,130 +106,87 @@ function Dashboard() {
     setOpen(false);
   };
 
-  const createTable = (
-    tableTitle: string,
-    tableHeader: { text: string }[],
-    tableValue: any[],
-    buttonText: string,
-    buttonUrl: string
-  ) => {
-    return (
+  return (
+    <Box display="flex" width={1} height={1} bgcolor="background.default">
+      <Sidebar />
       <Box
         width={1}
-        py={1}
+        height={1}
         display="flex"
         flexDirection="column"
-        alignItems="center"
-        gap={1}
-        borderLeft="1px solid #1b1e1f"
-        borderRadius={1}
-        bgcolor="#0E1011"
+        px={4}
+        py={2}
+        gap={4}
       >
-        <Typography variant="h6" color="white">
-          {tableTitle}
-        </Typography>
-
-        <CustomTable header={tableHeader} values={tableValue} />
-
-        <ButtonComponent
-          text={buttonText}
-          onClick={() => navigate(`${buttonUrl}`)}
-        />
-      </Box>
-    );
-  };
-
-  return (
-    <Container>
-      <Sidebar />
-      <Content>
-        <Box p={2}>
-          <Typography variant="h4" color="white">
-            Olá, bem-vindo {loggedUser}
-          </Typography>
-        </Box>
-
-        <Box width={1} height={1} display="flex" overflow="auto">
+        <Box display="flex" width={1} justifyContent="space-between">
           <Box
-            width="65%"
-            height={1}
-            display="flex"
-            flexDirection="column"
-            gap={2}
-            padding={0.5}
+            bgcolor="background.paper"
+            borderRadius={10}
+            minWidth={180}
+            width={1}
+            maxWidth={240}
           >
-            {createTable(
-              "Usuários cadastrados",
-              userTableHeader,
-              users,
-              "Ir para página de usuários",
-              "/users"
-            )}
-
-            {createTable(
-              "Atendimentos realizados",
-              serviceTableHeader,
-              services,
-              "Ir para página de atendimentos",
-              "/services"
-            )}
-          </Box>
-
-          <Box
-            width="35%"
-            height={1}
-            p={0.5}
-            display="flex"
-            flexDirection="column"
-            gap={1}
-          >
-            <Box
-              width={1}
-              py={1}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              gap={1}
-              borderLeft="1px solid #1b1e1f"
-              borderRadius={1}
-              bgcolor="#0E1011"
+            <Typography
+              variant="h1"
+              p={1}
+              color="text.primary"
+              sx={{ textTransform: "uppercase" }}
+              align="center"
             >
-              <Box
-                display="flex"
-                p={1}
-                width={1}
-                justifyContent="space-between"
-              >
-                <Typography variant="h6" color="white">
-                  Criar uma enquete
-                </Typography>
-                <ButtonComponent
-                  text="Criar enquete"
-                  variant="contained"
-                  onClick={() => setOpen(true)}
-                />
-              </Box>
-              <Box width={1}>
-                <CustomTable header={surveyTableHeader} values={survey} />
-              </Box>
+              Dashboard
+            </Typography>
+          </Box>
 
-              <ButtonComponent
-                text="Ir para página de enquetes"
-                onClick={() => navigate("/survey")}
-              />
-            </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bgcolor="background.paper"
+            borderRadius={10}
+            minWidth={180}
+            width={1}
+            maxWidth={240}
+            sx={{
+              "&:hover": {
+                bgcolor: "action.hover",
+                cursor: "pointer",
+              },
+            }}
+          >
+            <Typography
+              variant="caption"
+              p={1}
+              color="text.primary"
+              fontWeight={300}
+            >
+              Fazer sugestão
+            </Typography>
           </Box>
         </Box>
 
-        <CustomModal
-          open={open}
-          setState={setOpen}
-          title={"Criar enquete"}
-          formValues={surveyFormInputs}
-          onSubmit={onSubmit}
-        />
-      </Content>
-    </Container>
+        <Box width={1}>
+          <Grid container spacing={4} justifyContent="center">
+            {dashboardCardsValues.map((card: IDashboardCardsTypes) => {
+              return (
+                <Grid item xs={3}>
+                  <DashboardCard
+                    key={card.id}
+                    bgColor={card.bgColor}
+                    image={card.image}
+                    legend={card.legend}
+                    count={card.value}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+
+        <Box width={1} display="flex">
+          <TabsComponent value={activeTab} onChange={handleChangeTab} />
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
