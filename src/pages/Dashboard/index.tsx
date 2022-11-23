@@ -182,8 +182,50 @@ function Dashboard() {
           </Grid>
         </Box>
 
-        <Box width={1} display="flex">
+        <Box width={1} display="flex" justifyContent="space-between">
           <TabsComponent value={activeTab} onChange={handleChangeTab} />
+
+          {activeTab === 0 ? null : (
+            <ButtonComponent
+              color="primary"
+              variant="contained"
+              text={
+                activeTab === 1
+                  ? "Ver todos usuários"
+                  : activeTab === 2
+                  ? "Ver todos atendimentos"
+                  : activeTab === 3
+                  ? "Ver todas enquetes"
+                  : null
+              }
+              disableElavation
+            />
+          )}
+        </Box>
+
+        <Box>
+          {activeTab !== 0 ? (
+            <CustomTable
+              header={
+                activeTab === 1
+                  ? userTableHeader
+                  : activeTab === 2
+                  ? serviceTableHeader
+                  : activeTab === 3
+                  ? surveyTableHeader
+                  : null
+              }
+              values={
+                activeTab === 1
+                  ? users
+                  : activeTab === 2
+                  ? services
+                  : activeTab === 3
+                  ? survey
+                  : null
+              }
+            />
+          ) : null}
         </Box>
       </Box>
     </Box>
