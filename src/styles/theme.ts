@@ -69,6 +69,15 @@ let theme = createTheme({
       fontSize: "1rem",
       fontWeight: 600,
     },
+    subtitle1: {
+      fontSize: "0.75rem",
+      fontWeight: 500,
+    },
+    subtitle2: {
+      fontSize: "0.75rem",
+      fontWeight: 400,
+      textTransform: "uppercase",
+    },
   },
 });
 

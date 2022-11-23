@@ -96,7 +96,7 @@ function Sidebar() {
               height={1}
               py={1}
             >
-              <Typography variant="caption" color="#B0B3B8" align="left">
+              <Typography variant="subtitle2" color="#B0B3B8" align="left">
                 Menu
               </Typography>
 
@@ -150,7 +150,7 @@ function Sidebar() {
 
                       <Typography
                         className={open ? "text-open" : "text-closed"}
-                        variant="body2"
+                        variant="subtitle2"
                       >
                         {button.text}
                       </Typography>

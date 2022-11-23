@@ -50,7 +50,7 @@ function Login() {
             gap: "0.5rem",
           }}
         >
-          <Typography variant="h4" sx={{ color: "#fff" }}>
+          <Typography variant="h1" sx={{ color: "#fff" }}>
             Olá, seja bem vindo
           </Typography>
           <Typography variant="caption" sx={{ color: "#fff" }}>
