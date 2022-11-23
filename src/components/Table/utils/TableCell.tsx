@@ -11,10 +11,9 @@ const HeaderTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 12,
   },
   [`&.${tableCellClasses.root}`]: {
-    borderBottom: "1px solid #1b1e1f",
-    borderTop: "1px solid #1b1e1f",
+    borderBottom: "1px solid #E4E6EB",
     padding: 8,
-    color: "#303234",
+    color: "#fff",
   },
 }));
 
