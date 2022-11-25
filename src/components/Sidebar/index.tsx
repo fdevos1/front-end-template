@@ -11,7 +11,6 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ScreenSearchDesktopIcon from "@mui/icons-material/ScreenSearchDesktop";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ArticleIcon from "@mui/icons-material/Article";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import { AuthContext } from "../../context/auth";
 import { IButtonsSidebar } from "../../types/SidebarTypes";

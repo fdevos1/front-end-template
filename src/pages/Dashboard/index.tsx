@@ -185,22 +185,36 @@ function Dashboard() {
         <Box width={1} display="flex" justifyContent="space-between">
           <TabsComponent value={activeTab} onChange={handleChangeTab} />
 
-          {activeTab === 0 ? null : (
-            <ButtonComponent
-              color="primary"
-              variant="contained"
-              text={
-                activeTab === 1
-                  ? "Ver todos usuários"
-                  : activeTab === 2
-                  ? "Ver todos atendimentos"
-                  : activeTab === 3
-                  ? "Ver todas enquetes"
-                  : null
-              }
-              disableElavation
-            />
-          )}
+          <Box display="flex" gap={1}>
+            {activeTab === 3 ? (
+              <ButtonComponent
+                color="primary"
+                variant="contained"
+                onClick={() => setOpen(true)}
+                text="Criar enquete"
+                disableElevation
+              />
+            ) : (
+              <></>
+            )}
+
+            {activeTab === 0 ? null : (
+              <ButtonComponent
+                color="primary"
+                variant="contained"
+                text={
+                  activeTab === 1
+                    ? "Ver todos usuários"
+                    : activeTab === 2
+                    ? "Ver todos atendimentos"
+                    : activeTab === 3
+                    ? "Ver todas enquetes"
+                    : null
+                }
+                disableElavation
+              />
+            )}
+          </Box>
         </Box>
 
         <Box>
@@ -226,6 +240,14 @@ function Dashboard() {
               }
             />
           ) : null}
+
+          <CustomModal
+            setState={setOpen}
+            open={open}
+            title="Criar enquete"
+            formValues={surveyFormInputs}
+            onSubmit={onSubmit}
+          />
         </Box>
       </Box>
     </Box>

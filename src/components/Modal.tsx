@@ -1,10 +1,24 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Box, Modal, Fade, Backdrop, Typography, Input } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
+import {
+  Box,
+  Modal,
+  Fade,
+  Backdrop,
+  Typography,
+  TextField,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+
+import moment from "moment";
+import "moment/locale/pt";
 
 import ButtonComponent from "./Button";
 
 function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
+  moment.locale("pt-br");
+
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -18,10 +32,17 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
     p: 4,
   };
 
+  const StyledTextField = styled(TextField)(({ theme }) => ({
+    "&": {
+      backgroundColor: "#3A3B3C",
+      borderRadius: 4,
+    },
+  }));
+
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -39,14 +60,20 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
     >
       <Fade in={open}>
         <Box sx={style}>
-          <Typography variant="h4">{title}</Typography>
-          <Box p={2}>
+          <Box height="5%">
+            <Typography variant="h4" color="text.primary">
+              {title}
+            </Typography>
+          </Box>
+
+          <Box height="90%" p={2}>
             <Box component="form" onSubmit={handleSubmit(onSubmit)} py={2}>
               <Box
                 display="flex"
                 flexDirection="column"
-                gap={2}
+                gap={4}
                 justifyContent="center"
+                alignItems="center"
                 height={1}
               >
                 {formValues.map((item: any) => {
@@ -54,48 +81,76 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
                     <>
                       {item.type === "text" ? (
                         <Box display="flex" flexDirection="column" width={1}>
-                          <Typography variant="caption">
-                            {item.title}
-                          </Typography>
-                          <Input
+                          <StyledTextField
                             required
                             fullWidth
-                            placeholder={item.placeholder}
+                            label={item.title}
+                            InputLabelProps={{ color: "secondary" }}
                             inputProps={register(item.name)}
+                            variant="filled"
                           />
                         </Box>
                       ) : item.type === "answer" ? (
                         <Box width={1}>
-                          <Typography variant="caption">
-                            {item.title}
-                          </Typography>
-                          <Box
-                            display="flex"
-                            flexDirection="column"
-                            gap={1}
-                            width="75%"
-                          >
-                            <Input
+                          <Box display="flex" gap={1} width={1}>
+                            <StyledTextField
                               inputProps={register(`${item.name}`)}
+                              InputLabelProps={{ color: "secondary" }}
                               required
-                              placeholder={item.placeholder}
+                              label={item.placeholder}
+                              variant="filled"
                             />
-                            <Input
+                            <StyledTextField
                               inputProps={register(`${item.name}_2`)}
+                              InputLabelProps={{ color: "secondary" }}
                               required
-                              placeholder={item.placeholder}
+                              label={item.placeholder}
+                              variant="filled"
                             />
-                            <Input
+                            <StyledTextField
                               inputProps={register(`${item.name}_3`)}
-                              placeholder="Opcional"
+                              label="Opcional"
+                              InputLabelProps={{ color: "secondary" }}
+                              variant="filled"
                             />
                           </Box>
+                        </Box>
+                      ) : item.type === "date_picker" ? (
+                        <Box>
+                          <LocalizationProvider
+                            dateAdapter={AdapterMoment}
+                            adapterLocale="pt-br"
+                          >
+                            <Controller
+                              control={control}
+                              name={item.name}
+                              render={({
+                                field: { ref, onBlur, ...field },
+                                fieldState,
+                              }) => (
+                                <DateTimePicker
+                                  {...field}
+                                  inputRef={ref}
+                                  label="Escolha o horário para envio"
+                                  ampm={false}
+                                  renderInput={(inputProps) => (
+                                    <StyledTextField
+                                      {...inputProps}
+                                      onBlur={onBlur}
+                                      name={item.name}
+                                    />
+                                  )}
+                                />
+                              )}
+                            />
+                          </LocalizationProvider>
                         </Box>
                       ) : null}
                     </>
                   );
                 })}
                 <Box
+                  height="5%"
                   sx={{
                     position: "absolute",
                     bottom: 16,
@@ -105,6 +160,7 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
                     text="Criar enquete"
                     type="submit"
                     variant="contained"
+                    color="secondary"
                   />
                 </Box>
               </Box>

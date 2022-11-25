@@ -3,7 +3,9 @@ import { Button, Typography } from "@mui/material";
 function ButtonComponent(props: any) {
   return (
     <Button {...props}>
-      <Typography variant="button">{props.text}</Typography>
+      <Typography variant="button" color="text.primary">
+        {props.text}
+      </Typography>
     </Button>
   );
 }

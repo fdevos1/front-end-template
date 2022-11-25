@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 const StyledTableRow = styled(TableRow)(() => ({
   [`&.${tableRowClasses.root}`]: {
     backgroundColor: "#242526",
-    borderBottom: "1px solid #E4E6EB",
+    borderBottom: "1px solid #3A3B3C",
   },
 }));
 

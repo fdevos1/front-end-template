@@ -20,20 +20,6 @@ function Login() {
     signIn(email, password);
   };
 
-  const LoginInput = styled(TextField)({
-    "& label": {
-      color: "#e4e6eb",
-    },
-
-    "& label.Mui-focused": {
-      color: "#b0b3b8",
-    },
-
-    "& fieldset": {
-      borderColor: "#e4e6eb",
-    },
-  });
-
   return (
     <Container>
       <Content>
