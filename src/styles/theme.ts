@@ -12,6 +12,10 @@ let theme = createTheme({
       primary: "#E4E6EB",
       secondary: "#B0B3B8",
     },
+    common: {
+      white: "#fff",
+      black: "#000",
+    },
     background: {
       default: "#121212",
       paper: "#242526",
@@ -35,12 +39,14 @@ let theme = createTheme({
       fontWeight: 700,
     },
     h2: {
-      fontSize: "1.75rem",
+      fontSize: "5rem",
       fontWeight: 600,
+      fontFamily: "Gotham",
     },
     h3: {
-      fontSize: "1.75rem",
+      fontSize: "4.75rem",
       fontWeight: 500,
+      fontFamily: "Gotham Light",
     },
     h4: {
       fontSize: "1.5rem",
@@ -57,7 +63,6 @@ let theme = createTheme({
     caption: {
       fontSize: "1.5rem",
       fontWeight: 300,
-      textTransform: "uppercase",
     },
     body1: {
       fontSize: "0.75rem",

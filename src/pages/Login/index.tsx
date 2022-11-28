@@ -1,8 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Box, TextField, Typography } from "@mui/material";
-import { styled } from "@mui/system";
-
-import { Container, Content, LoginSide } from "./styles";
 
 import ButtonComponent from "../../components/Button";
 
@@ -21,26 +18,55 @@ function Login() {
   };
 
   return (
-    <Container>
-      <Content>
-        <p>PANDORGA</p>
-        <p className="light">TECH</p>
-      </Content>
-      <LoginSide>
+    <Box
+      width={1}
+      height={1}
+      display="flex"
+      overflow="hidden"
+      alignItems="center"
+      bgcolor="background.default"
+      p={1}
+    >
+      <Box
+        display="flex"
+        width="60%"
+        height={1}
+        bgcolor="background.paper"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius={0.5}
+      >
+        <Typography variant="h2" color="common.white">
+          PANDORGA
+        </Typography>
+        <Typography variant="h3" color="common.white">
+          TECH
+        </Typography>
+      </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        width="40%"
+        height={1}
+        bgcolor="background.default"
+        borderRadius={0.5}
+        alignItems="center"
+        justifyContent="center"
+        gap={2}
+      >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "0.5rem",
           }}
         >
-          <Typography variant="h1" sx={{ color: "#fff" }}>
+          <Typography variant="caption" sx={{ color: "#fff" }}>
             Olá, seja bem vindo
           </Typography>
           <Typography variant="caption" sx={{ color: "#fff" }}>
-            Por favor realize o login para ter acesso ao sistema.
+            Realize o login para ter acesso.
           </Typography>
         </Box>
 
@@ -51,7 +77,13 @@ function Login() {
             width: "40%",
           }}
         >
-          <form onSubmit={handleSubmit} className="form">
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            display="flex"
+            flexDirection="column"
+            gap={1}
+          >
             <Box
               sx={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
             >
@@ -99,10 +131,10 @@ function Login() {
                 }}
               />
             </Box>
-          </form>
+          </Box>
         </Box>
-      </LoginSide>
-    </Container>
+      </Box>
+    </Box>
   );
 }
 

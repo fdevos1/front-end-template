@@ -121,13 +121,13 @@ function Dashboard() {
         <Box display="flex" width={1} justifyContent="space-between">
           <Box
             bgcolor="background.paper"
-            borderRadius={10}
+            borderRadius={2.5}
             minWidth={180}
             width={1}
             maxWidth={240}
           >
             <Typography
-              variant="h1"
+              variant="h4"
               p={1}
               color="text.primary"
               sx={{ textTransform: "uppercase" }}
@@ -138,9 +138,6 @@ function Dashboard() {
           </Box>
 
           <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
             bgcolor="background.paper"
             borderRadius={10}
             minWidth={180}
@@ -148,16 +145,17 @@ function Dashboard() {
             maxWidth={240}
             sx={{
               "&:hover": {
-                bgcolor: "action.hover",
+                backgroundColor: "action.hover",
                 cursor: "pointer",
               },
             }}
           >
             <Typography
-              variant="caption"
+              variant="h4"
               p={1}
               color="text.primary"
-              fontWeight={300}
+              sx={{ textTransform: "uppercase", fontWeight: 300 }}
+              align="center"
             >
               Fazer sugestão
             </Typography>

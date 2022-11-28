@@ -13,7 +13,8 @@ const Searchbar = styled((props: TextFieldProps) => (
   />
 ))(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
-    border: "1px solid #1b1e1f",
+    width: 200,
+    backgroundColor: "#242526",
     overflow: "hidden",
     borderRadius: 4,
     transition: theme.transitions.create([
@@ -29,7 +30,7 @@ const Searchbar = styled((props: TextFieldProps) => (
     },
 
     "& .MuiInputLabel-root": {
-      color: "#1b1e1f",
+      color: "#E4E6EB",
     },
   },
 }));

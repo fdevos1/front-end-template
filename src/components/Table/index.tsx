@@ -13,7 +13,7 @@ import moment from "moment";
 import ButtonComponent from "../Button";
 
 import { HeaderTableCell, StyledTableCell } from "./utils/TableCell";
-import { StyledTableRow } from "./utils/TableRow";
+import { StyledTableRow, StyledHeaderTableRow } from "./utils/TableRow";
 import { CustomTablePagination } from "./utils/TablePagination";
 
 function CustomTable(props: any) {
@@ -61,7 +61,7 @@ function CustomTable(props: any) {
     <TableContainer sx={{ height: "100%" }}>
       <Table>
         <TableHead>
-          <StyledTableRow>
+          <StyledHeaderTableRow>
             {props.header.map((item: any, index: any) => {
               return (
                 <HeaderTableCell align="center" variant="head" key={index}>
@@ -69,7 +69,7 @@ function CustomTable(props: any) {
                 </HeaderTableCell>
               );
             })}
-          </StyledTableRow>
+          </StyledHeaderTableRow>
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0

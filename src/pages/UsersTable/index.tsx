@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Box, InputAdornment } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, InputAdornment, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { Container, Content } from "./styles";
 
 import Sidebar from "../../components/Sidebar";
 import CustomTable from "../../components/Table";
@@ -25,19 +23,49 @@ function UsersTable() {
   }, []);
 
   return (
-    <Container>
+    <Box
+      display="flex"
+      width={1}
+      height={1}
+      gap={1}
+      bgcolor="background.default"
+    >
       <Sidebar />
-      <Content>
+      <Box
+        display="flex"
+        flexDirection="column"
+        width={1}
+        height={1}
+        px={4}
+        py={2}
+        gap={2}
+      >
         <Box
-          sx={{
-            display: "flex",
-            px: 4,
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+          bgcolor="background.paper"
+          borderRadius={2.5}
+          minWidth={180}
+          width={1}
+          maxWidth={280}
         >
-          <Box sx={{ display: "flex", height: 64, gap: 4 }}>
-            <Box sx={{ width: "25rem", maxWidth: 500, height: 1 }}>
+          <Typography
+            variant="h4"
+            p={1}
+            color="text.primary"
+            sx={{ textTransform: "uppercase" }}
+            align="center"
+            noWrap
+          >
+            Usuários
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          px={0.5}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box display="flex" gap={4}>
+            <Box width="25rem" maxWidth={500} height={1}>
               <SearchbarComponent
                 label="Procurar usuário"
                 inputProps={{
@@ -51,11 +79,11 @@ function UsersTable() {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ width: 1, height: 1 }}>
+        <Box width={1} height={1}>
           <CustomTable header={userTableHeader} values={users} />
         </Box>
-      </Content>
-    </Container>
+      </Box>
+    </Box>
   );
 }
 
