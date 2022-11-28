@@ -209,6 +209,15 @@ function Dashboard() {
                     ? "Ver todas enquetes"
                     : null
                 }
+                onClick={
+                  activeTab === 1
+                    ? () => navigate("/users")
+                    : activeTab === 2
+                    ? () => navigate("/services")
+                    : activeTab === 3
+                    ? () => navigate("/survey")
+                    : null
+                }
                 disableElavation
               />
             )}
