@@ -100,57 +100,30 @@ function SurveyComponent({ survey }: any) {
                 justifyContent="space-around"
                 py={1}
               >
-                {survey.survey_votes.map((item: any) => {
-                  return (
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      width="25%"
-                      height={1}
-                    >
-                      <Box
-                        width={1}
-                        height={40}
-                        borderRadius="8px 8px 0 0"
-                        border="2px solid #1b1e1f"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                      >
-                        <Typography variant="button" color="white">
-                          {item.answer_text}
-                        </Typography>
-                      </Box>
-                      <Box
-                        width={1}
-                        height={1}
-                        border="1px solid #1b1e1f"
-                        borderTop="0"
-                        borderRadius="0 0 8px 8px"
-                        textAlign="center"
-                        gap={1}
-                      >
-                        <Box
-                          width={1}
-                          height={1}
-                          maxHeight={40}
-                          minHeight={32}
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="space-evenly"
-                        >
-                          <Typography variant="body2" color="white">
-                            Felipe Devos - 555180105521
-                          </Typography>
-                          <Divider
-                            variant="middle"
-                            sx={{ borderColor: "#1b1e1f" }}
-                          />
-                        </Box>
-                      </Box>
-                    </Box>
-                  );
-                })}
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  height={40}
+                  width={160}
+                  border="1px solid #1b1e1f"
+                >
+                  <Typography color="text.primary" variant="body2">
+                    Sim
+                  </Typography>
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  height={40}
+                  width={160}
+                  border="1px solid #1b1e1f"
+                >
+                  <Typography color="text.primary" variant="body2">
+                    Não
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           </Box>

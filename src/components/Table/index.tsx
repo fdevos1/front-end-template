@@ -121,10 +121,38 @@ function CustomTable(props: any) {
             };
 
             const sendedSurvey = () => {
+              const openInNewTab = (url: string): void => {
+                const newWindow = window.open(
+                  url,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+                if (newWindow) newWindow.opener = null;
+              };
+
               if (item.survey_sended === false) {
-                return <ButtonComponent text="enviar" />;
+                return (
+                  <ButtonComponent
+                    text="enviar"
+                    onClick={() =>
+                      openInNewTab(
+                        `https://wa.me/555137793961?text=enviar%20enquete%20id=${item.survey_id}`
+                      )
+                    }
+                  />
+                );
               } else if (item.survey_sended === true) {
                 return "enviado";
+              }
+            };
+
+            const onTransmissionList = () => {
+              if (item.on_transmission_list === false) {
+                return "Não";
+              } else if (item.on_transmission_list === true) {
+                return "Sim";
+              } else {
+                return null;
               }
             };
 
@@ -197,7 +225,7 @@ function CustomTable(props: any) {
                   scope="row"
                   size="small"
                 >
-                  {sendedSurvey()}
+                  {sendedSurvey() || onTransmissionList()}
                 </StyledTableCell>
               </StyledTableRow>
             );

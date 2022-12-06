@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-
-import { Container, Content } from "./styles";
+import { Box, Typography } from "@mui/material";
 
 import Sidebar from "../../components/Sidebar";
 import CustomTable from "../../components/Table";
@@ -44,16 +42,43 @@ function SurveyManagement() {
   };
 
   return (
-    <Container>
+    <Box display="flex" width={1} height={1} bgcolor="background.default">
       <Sidebar />
-      <Content>
-        <Box display="flex" width={1} height={1} alignItems="center">
-          <Box
-            width="30%"
-            height={1}
-            borderRight="1px solid #1b1e1f"
-            borderLeft="1px solid #1b1e1f"
+      <Box
+        width={1}
+        height={1}
+        display="flex"
+        flexDirection="column"
+        px={4}
+        py={2}
+        gap={4}
+      >
+        <Box
+          bgcolor="background.paper"
+          borderRadius={2.5}
+          minWidth={180}
+          width={1}
+          maxWidth={240}
+        >
+          <Typography
+            variant="h4"
+            p={1}
+            color="text.primary"
+            sx={{ textTransform: "uppercase" }}
+            align="center"
           >
+            Enquetes
+          </Typography>
+        </Box>
+
+        <Box
+          display="flex"
+          width={1}
+          height={1}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box width="35%" height={1} border="1px solid #1b1e1f" borderTop="0">
             <CustomTable
               values={survey}
               header={surveyTableHeader}
@@ -61,17 +86,18 @@ function SurveyManagement() {
             />
           </Box>
           <Box
-            width="70%"
+            width="60%"
             height={1}
             display="flex"
             flexDirection="column"
-            mt={4}
+            border="1px solid #1b1e1f"
+            borderTop="0"
           >
             <SurveyComponent survey={selectedSurvey} />
           </Box>
         </Box>
-      </Content>
-    </Container>
+      </Box>
+    </Box>
   );
 }
 

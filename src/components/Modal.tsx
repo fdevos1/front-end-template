@@ -90,31 +90,6 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
                             variant="filled"
                           />
                         </Box>
-                      ) : item.type === "answer" ? (
-                        <Box width={1}>
-                          <Box display="flex" gap={1} width={1}>
-                            <StyledTextField
-                              inputProps={register(`${item.name}`)}
-                              InputLabelProps={{ color: "secondary" }}
-                              required
-                              label={item.placeholder}
-                              variant="filled"
-                            />
-                            <StyledTextField
-                              inputProps={register(`${item.name}_2`)}
-                              InputLabelProps={{ color: "secondary" }}
-                              required
-                              label={item.placeholder}
-                              variant="filled"
-                            />
-                            <StyledTextField
-                              inputProps={register(`${item.name}_3`)}
-                              label="Opcional"
-                              InputLabelProps={{ color: "secondary" }}
-                              variant="filled"
-                            />
-                          </Box>
-                        </Box>
                       ) : item.type === "date_picker" ? (
                         <Box>
                           <LocalizationProvider

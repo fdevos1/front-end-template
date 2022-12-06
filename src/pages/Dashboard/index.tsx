@@ -61,13 +61,7 @@ function Dashboard() {
   };
 
   const onSubmit = async (data: any) => {
-    const {
-      survey_text,
-      survey_subject,
-      answer_text,
-      answer_text_2,
-      answer_text_3,
-    }: any = data;
+    const { survey_text, survey_subject }: any = data;
 
     const surveyJson = {
       survey_text: survey_text,
@@ -85,15 +79,11 @@ function Dashboard() {
       const answerList = [
         {
           id_from_survey: lastSurveyCreated.survey_id,
-          answer_text,
+          answer_text: "Sim",
         },
         {
           id_from_survey: lastSurveyCreated.survey_id,
-          answer_text: answer_text_2,
-        },
-        {
-          id_from_survey: lastSurveyCreated.survey_id,
-          answer_text: answer_text_3,
+          answer_text: "Não",
         },
       ];
 

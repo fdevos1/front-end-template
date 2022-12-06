@@ -11,7 +11,7 @@ const userTableHeader = [
   { text: "Nome" },
   { text: "Celular" },
   { text: "Criado em" },
-  { text: "" },
+  { text: "Na lista de transmissão" },
 ];
 
 const surveyTableHeader = [
