@@ -20,19 +20,24 @@ html, #root, body, * {
   outline: 0;
   box-sizing: border-box
 }
-@media screen and (max-width: 768px) {
+
+
+
+@media screen and (min-width: 768px) {
   html, body {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
-@media screen and (max-width: 1024px) {
+
+@media screen and (min-width: 1024px) {
   html,body {
     font-size: 12px;
   }
 }
-@media screen and (max-width: 1440px) {
+
+@media screen and (min-width: 1440px) {
   html, body {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 `;

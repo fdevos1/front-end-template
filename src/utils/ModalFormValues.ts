@@ -29,4 +29,14 @@ const surveyFormInputs = [
   },
 ];
 
-export { surveyFormInputs };
+const messageServiceForm = [
+  {
+    id: 0,
+    type: "text",
+    title: "Mensagem de envio",
+    placeholder: "Insira o que o bot enviará aos usuários",
+    name: "message_service_text",
+  },
+];
+
+export { surveyFormInputs, messageServiceForm };

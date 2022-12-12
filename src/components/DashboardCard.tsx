@@ -11,6 +11,7 @@ function DashboardCard({ bgColor, image, legend, count }: any) {
       padding: 24,
       borderRadius: 8,
       height: 240,
+      minWidth: 160,
     },
   }));
 

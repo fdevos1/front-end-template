@@ -27,8 +27,6 @@ const StyledTab = styled(Tab)(() => ({
 }));
 
 function TabsComponent({ value, onChange }: any) {
-  console.log(value);
-
   return (
     <Box borderRadius={10} bgcolor="background.paper">
       <StyledTabsContainer value={value} onChange={onChange}>

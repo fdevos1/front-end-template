@@ -132,7 +132,7 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
                   }}
                 >
                   <ButtonComponent
-                    text="Criar enquete"
+                    text="Criar"
                     type="submit"
                     variant="contained"
                     color="secondary"
