@@ -49,15 +49,7 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
   const handleClose = () => setState(false);
 
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
-    >
+    <Modal open={open} onClose={handleClose} closeAfterTransition>
       <Fade in={open}>
         <Box sx={style}>
           <Box height="5%">

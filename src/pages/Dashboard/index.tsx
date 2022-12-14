@@ -36,6 +36,8 @@ import { IDashboardCardsTypes } from "../../types/DashboardTypes";
 import TabsComponent from "../../components/Tabs";
 import moment from "moment";
 import MenuComponent from "../../components/Menu";
+import PageHeader from "../../components/PageHeader";
+import { createMessageService } from "../../services/messageServices";
 
 function Dashboard() {
   const [services, setServices] = useState<IServiceTypes[]>([]);
@@ -138,9 +140,8 @@ function Dashboard() {
   };
 
   const submitMessageService = (data: any) => {
+    createMessageService(data);
     setOpenMessageService(false);
-
-    console.log(data);
   };
 
   const onSubmit = async (data: any) => {
@@ -198,47 +199,31 @@ function Dashboard() {
         gap={4}
       >
         <Box display="flex" width={1} justifyContent="space-between">
-          <Box
-            bgcolor="background.paper"
-            borderRadius={2.5}
-            minWidth={180}
-            width={1}
-            maxWidth={240}
-          >
-            <Typography
-              variant="h4"
-              p={1}
-              color="text.primary"
-              sx={{ textTransform: "uppercase" }}
-              align="center"
+          <PageHeader pageTitle="Dashboard">
+            <Box
+              bgcolor="background.paper"
+              borderRadius={10}
+              minWidth={180}
+              width={1}
+              maxWidth={240}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "action.hover",
+                  cursor: "pointer",
+                },
+              }}
             >
-              Dashboard
-            </Typography>
-          </Box>
-
-          <Box
-            bgcolor="background.paper"
-            borderRadius={10}
-            minWidth={180}
-            width={1}
-            maxWidth={240}
-            sx={{
-              "&:hover": {
-                backgroundColor: "action.hover",
-                cursor: "pointer",
-              },
-            }}
-          >
-            <Typography
-              variant="h4"
-              p={1}
-              color="text.primary"
-              sx={{ textTransform: "uppercase", fontWeight: 300 }}
-              align="center"
-            >
-              Fazer sugestão
-            </Typography>
-          </Box>
+              <Typography
+                variant="h4"
+                p={1}
+                color="text.primary"
+                sx={{ textTransform: "uppercase", fontWeight: 300 }}
+                align="center"
+              >
+                Fazer sugestão
+              </Typography>
+            </Box>
+          </PageHeader>
         </Box>
 
         <Box width={1}>
@@ -337,7 +322,7 @@ function Dashboard() {
 
           <CustomModal
             open={openMessageService}
-            setOpen={setOpenMessageService}
+            setState={setOpenMessageService}
             title="Configurar disparo"
             formValues={messageServiceForm}
             onSubmit={submitMessageService}

@@ -1,11 +1,6 @@
 import { Box, Tabs, Tab } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-interface StyledTabProps {
-  label: string;
-  value: number;
-}
-
 const StyledTabsContainer = styled(Tabs)(() => ({
   "& .MuiTabs-indicator": {
     display: "none",
@@ -16,9 +11,14 @@ const StyledTab = styled(Tab)(() => ({
   "&": {
     fontWeight: 400,
   },
+
+  "&:hover": {
+    backgroundColor: "#3a3b3c",
+  },
+
   "&.Mui-selected": {
     color: "#E4E6EB",
-    backgroundColor: "#3A3B3C",
+    backgroundColor: "#B0B3B8",
     border: "0",
   },
   "&.Mui-focusVisible": {
