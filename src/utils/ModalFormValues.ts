@@ -35,7 +35,7 @@ const messageServiceForm = [
     type: "text",
     title: "Mensagem de envio",
     placeholder: "Insira o que o bot enviará aos usuários",
-    name: "message_service_text",
+    name: "text",
   },
 ];
 

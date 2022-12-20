@@ -41,3 +41,13 @@ export const createSurveyAnswer = async (data: any) => {
     return err;
   }
 };
+
+export const getSurveyVotes = async (surveyId: string) => {
+  try {
+    const response = await api.get(`/get-survey-answer&survey=${surveyId}`);
+
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};

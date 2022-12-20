@@ -22,4 +22,17 @@ const surveyTableHeader = [
   { text: "Enviada" },
 ];
 
-export { serviceTableHeader, userTableHeader, surveyTableHeader };
+const messageServiceHeader = [
+  { text: "ID" },
+  { text: "Texto de envio" },
+  { text: "Criado em" },
+  { text: "Fazer envio" },
+  { text: "" },
+];
+
+export {
+  serviceTableHeader,
+  userTableHeader,
+  surveyTableHeader,
+  messageServiceHeader,
+};

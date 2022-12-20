@@ -16,7 +16,14 @@ import "moment/locale/pt";
 
 import ButtonComponent from "./Button";
 
-function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
+function CustomModal({
+  setState,
+  open,
+  title,
+  formValues,
+  onSubmit,
+  children,
+}: any) {
   moment.locale("pt-br");
 
   const style = {
@@ -116,6 +123,8 @@ function CustomModal({ setState, open, title, formValues, onSubmit }: any) {
                     </>
                   );
                 })}
+
+                {children}
                 <Box
                   height="5%"
                   sx={{

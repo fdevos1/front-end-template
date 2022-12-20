@@ -18,6 +18,7 @@ import {
 } from "../../services/survey";
 
 import {
+  messageServiceHeader,
   serviceTableHeader,
   surveyTableHeader,
   userTableHeader,
@@ -37,15 +38,22 @@ import TabsComponent from "../../components/Tabs";
 import moment from "moment";
 import MenuComponent from "../../components/Menu";
 import PageHeader from "../../components/PageHeader";
-import { createMessageService } from "../../services/messageServices";
+import {
+  createMessageService,
+  getMessageService,
+} from "../../services/messageServices";
+import { IMessageServiceTypes } from "../../types/MessageServiceTypes";
 
 function Dashboard() {
   const [services, setServices] = useState<IServiceTypes[]>([]);
   const [users, setUsers] = useState<IUserTypes[]>([]);
   const [survey, setSurvey] = useState<any[]>([]);
+  const [messageServiceList, setMessageServiceList] = useState<
+    IMessageServiceTypes[]
+  >([]);
   const [openSurvey, setOpenSurvey] = useState(false);
   const [openMessageService, setOpenMessageService] = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const navigate = useNavigate();
@@ -108,7 +116,7 @@ function Dashboard() {
       id: 2,
       image: <ScreenSearchDesktop />,
       bgColor: "#E3E4B2",
-      legend: "Feitos hoje",
+      legend: "total de hoje",
       value: `${servicesCreatedToday.length} atendimentos`,
     },
     {
@@ -129,11 +137,17 @@ function Dashboard() {
 
     const fetchUsers = await getUser();
     setUsers(fetchUsers);
+
+    const fetchMessageService = await getMessageService();
+    console.log(fetchMessageService);
+    setMessageServiceList(fetchMessageService);
   };
 
   useEffect(() => {
     listServices();
   }, []);
+
+  console.log(messageServiceList);
 
   const handleChangeTab = (e: any, newValue: number) => {
     setActiveTab(newValue);
@@ -154,24 +168,6 @@ function Dashboard() {
 
     await createSurvey(surveyJson);
 
-    let lastSurveyCreated: ISurveyType | null = await getLastSurvey();
-
-    if (lastSurveyCreated) {
-      const answerList = [
-        {
-          id_from_survey: lastSurveyCreated.survey_id,
-          answer_text: "Sim",
-        },
-        {
-          id_from_survey: lastSurveyCreated.survey_id,
-          answer_text: "Não",
-        },
-      ];
-
-      await createSurveyAnswer(answerList);
-    }
-
-    lastSurveyCreated = null;
     setOpenSurvey(false);
   };
 
@@ -217,7 +213,7 @@ function Dashboard() {
                 variant="h4"
                 p={1}
                 color="text.primary"
-                sx={{ textTransform: "uppercase", fontWeight: 300 }}
+                sx={{ textTransform: "uppercase" }}
                 align="center"
               >
                 Fazer sugestão
@@ -326,7 +322,12 @@ function Dashboard() {
             title="Configurar disparo"
             formValues={messageServiceForm}
             onSubmit={submitMessageService}
-          />
+          >
+            <CustomTable
+              header={messageServiceHeader}
+              values={messageServiceList}
+            />
+          </CustomModal>
         </Box>
 
         <Box position="absolute" bottom={10} right={15}>

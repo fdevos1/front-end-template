@@ -113,10 +113,34 @@ function CustomTable(props: any) {
             };
 
             const votesLength = () => {
-              if (item.votes > 0) {
-                return item.votes;
-              } else {
-                return "Sem votos";
+              if (item.survey_votes) {
+                return item.survey_votes.length;
+              }
+            };
+
+            const sended = () => {
+              const openInNewTab = (url: string): void => {
+                const newWindow = window.open(
+                  url,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+                if (newWindow) newWindow.opener = null;
+              };
+
+              if (item.id && item.text && item.sended === false) {
+                return (
+                  <ButtonComponent
+                    text="enviar"
+                    onClick={() =>
+                      openInNewTab(
+                        `https://wa.me/555137793961?text=enviar%20enquete%20id=${item.id}`
+                      )
+                    }
+                  />
+                );
+              } else if (item.id && item.text && item.sended === true) {
+                return "enviado";
               }
             };
 
@@ -157,7 +181,7 @@ function CustomTable(props: any) {
             };
 
             const serviceId = () => {
-              if (item.id) {
+              if (item.id && !item.text) {
                 return item.id.slice(0, 8);
               } else {
                 return;
@@ -179,7 +203,8 @@ function CustomTable(props: any) {
                     {item?.user_id ||
                       serviceId() ||
                       item?.group_id ||
-                      item?.survey_id}
+                      item?.survey_id ||
+                      item?.id}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell
@@ -192,7 +217,8 @@ function CustomTable(props: any) {
                     {item?.name ||
                       item?.user_cellphone ||
                       item?.group_name ||
-                      item?.survey_text}
+                      item?.survey_text ||
+                      item?.text}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell
@@ -215,7 +241,10 @@ function CustomTable(props: any) {
                   size="small"
                 >
                   <Typography variant="body2">
-                    {userExist() || serviceStatus() || votesLength()}
+                    {userExist() ||
+                      serviceStatus() ||
+                      sended() ||
+                      votesLength()}
                   </Typography>
                 </StyledTableCell>
 
