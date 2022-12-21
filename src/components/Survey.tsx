@@ -100,29 +100,73 @@ function SurveyComponent({ survey }: any) {
                 justifyContent="space-around"
                 py={1}
               >
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  height={40}
-                  width={160}
-                  border="1px solid #1b1e1f"
-                >
-                  <Typography color="text.primary" variant="body2">
-                    Sim
-                  </Typography>
+                <Box display="flex" flexDirection="column">
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    height={40}
+                    width={160}
+                    border="1px solid #1b1e1f"
+                  >
+                    <Typography color="text.primary" variant="body2">
+                      Sim
+                    </Typography>
+                  </Box>
+
+                  <Box display="flex" flexDirection="column" gap={1} mt={1}>
+                    {survey.survey_votes.map((item: any) => {
+                      if (item.answer_text === "sim") {
+                        return (
+                          <Box
+                            display="flex"
+                            height={20}
+                            justifyContent="center"
+                            border="1px solid #242526"
+                            borderRadius={1}
+                          >
+                            <Typography variant="body2" color="text.primary">
+                              {item.user_id_vote}
+                            </Typography>
+                          </Box>
+                        );
+                      }
+                    })}
+                  </Box>
                 </Box>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  height={40}
-                  width={160}
-                  border="1px solid #1b1e1f"
-                >
-                  <Typography color="text.primary" variant="body2">
-                    Não
-                  </Typography>
+                <Box display="flex" flexDirection="column">
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    height={40}
+                    width={160}
+                    border="1px solid #1b1e1f"
+                  >
+                    <Typography color="text.primary" variant="body2">
+                      Não
+                    </Typography>
+                  </Box>
+
+                  <Box display="flex" flexDirection="column" gap={1} mt={1}>
+                    {survey.survey_votes.map((item: any) => {
+                      if (item.answer_text === "não") {
+                        return (
+                          <Box
+                            display="flex"
+                            height={20}
+                            justifyContent="center"
+                            border="1px solid #242526"
+                            borderRadius={1}
+                          >
+                            <Typography variant="body2" color="text.primary">
+                              {item.user_id_vote}
+                            </Typography>
+                          </Box>
+                        );
+                      }
+                    })}
+                  </Box>
                 </Box>
               </Box>
             </Box>
